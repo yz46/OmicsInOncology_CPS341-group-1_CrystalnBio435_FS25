@@ -11,6 +11,6 @@ In this github repository we will share the assignments and R-challenges with yo
 
 
 ## About Markdown and html
-A very useful cheatsheet
+A very useful cheatsheet for markdown can be found [https://github.com/adam-p/markdown-here/wiki/markdown-cheatshee](
 
 https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet
