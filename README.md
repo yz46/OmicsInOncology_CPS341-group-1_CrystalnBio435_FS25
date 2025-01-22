@@ -8,6 +8,20 @@ Through lectures, work sessions, literature discussions, hands-on data analysis 
 ## Objectives of this repository
 In this github repository we will share the assignments and R-challenges with you and you are supposed to "pull request" your solution back here.
 
+# UU n UZH coil course
+In this repository we will develop Rchallenges.
+
+How this could look is visualized here
+<img src="img/github4teaching.png" width="800"> 
+
+## How to use this repository
+1. Fork this repository to your github and create a new branch for your group
+2. Work on the Rchallenges
+3. Push your changes to your branch
+4. Create a pull request to merge your branch with the main branch
+5. The pull request will be reviewed and merged
+
+
 
 
 ## About Markdown and html
