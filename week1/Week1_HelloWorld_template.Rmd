@@ -14,7 +14,7 @@ bibliography: bibliography.bib
 library(readr) # make sure your R has this library loaded, if not install it (see line above)
 ```
 
-# Play around with RMardown
+# Play around with RMarkdown
 
 Try to play around with Rmarkdown. You can find a cheatsheet in RStudio under Help. 
 
