@@ -5,7 +5,6 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2: default
   bookdown::pdf_document2: default
-bibliography: bibliography.bib
 ---
 
 ```{r load libraries, include=FALSE}
@@ -23,6 +22,7 @@ The major strength of RMarkdown is, that you can write code, and the result is g
 
 ```{r code}
 1+2
+1:5
 ```
 
 # Play around with RMarkdown
