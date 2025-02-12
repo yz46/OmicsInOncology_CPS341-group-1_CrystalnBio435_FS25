@@ -18,7 +18,7 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 2
 * from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=TRUE, include=TRUE}
+```{r myN1, echo=TRUE, include=TRUE}
 myNumber <- 12.43
 
 # do some calculations
@@ -31,9 +31,17 @@ log(myNumber)
 log10(myNumber)
 ```
 
-```{r lg10, echo=TRUE, include=TRUE}
-# log10
+```{r lg2, echo=TRUE, include=TRUE}
+# log2
 log2(myNumber)
+```
+```{r myN, echo=TRUE, include=TRUE}
+# squareroot
+sqrt(myNumber)
+```
+```{r myN2, echo=TRUE, include=TRUE}
+#natural antilog 
+exp(myNumber)
 ```
 
 # Session Information
@@ -41,5 +49,62 @@ log2(myNumber)
 ```{r sessionInfo, echo=TRUE, include=TRUE}
 pander::pander(sessionInfo())
 ```
+
+```{r, echo=TRUE, include=TRUE}
+#assign the radius
+r <- 20/2
+#area circle 
+(area_circle <- pi*r^2)
+
+```
+```{r, echo=TRUE, include=TRUE}
+#cube root
+result <- (14*0.51)^(1/3)
+print (result)
+```
+
+```{r, echo=TRUE, include=TRUE}
+#create a vector
+weight <- c(69,62,57,59,64,56,66,67,66)
+
+#display the vector
+print (weight)
+```
+```{r, echo=TRUE, include=TRUE}
+vec_mean <- mean (weight)
+print(vec_mean)
+```
+
+```{r, echo=TRUE, include=TRUE}
+var(weight)
+sd (weight)
+range(weight)
+length(weight)
+```
+```{r, echo=TRUE, include=TRUE}
+first_five <- weight [1:5]
+print (first_five)
+```
+```{r, echo=TRUE, include=TRUE}
+#create vector 
+height <- c(112,102,83,84,99,90,77,112,133,112)
+
+#display the vector
+print(height)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
