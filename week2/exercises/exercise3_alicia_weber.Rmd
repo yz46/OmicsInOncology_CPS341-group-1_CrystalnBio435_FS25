@@ -1,0 +1,88 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+### Q4 & Q5
+```{r myN, echo=FALSE, include=TRUE}
+#file.choose()
+dd <- read.csv("/Users/lish/Desktop/data_omics/whaledata.csv", sep=';')
+head(dd)
+```
+
+### Q6
+
+```{r 6, echo=TRUE, include=TRUE}
+#nr of variables
+ncol(dd)
+
+#types of variables
+class(dd$month)
+class(dd$water.noise)
+```
+
+### Q7
+
+```{r 7, echo=TRUE, include=TRUE}
+summary(dd)
+#nr of whales has 1 NA
+```
+
+
+### Q9
+
+```{r 9, echo=TRUE, include=TRUE}
+depth1200 <- dd[dd$depth > 1200, ]
+
+grad200 <- dd[dd$gradient > 200, ]
+
+noiselow <- dd[dd$water.noise == 'low', ]
+
+mayhigh <- dd[dd$water.noise == 'high' & dd$month == 'May', ]
+
+octlowmed <- dd[dd$water.noise == 'low' & dd$month == 'October' & dd$gradient > median(dd$gradient), ]
+
+filteredlatlong <- dd[dd$latitude >= 60.0 & dd$latitude <= 61.0 & 
+                    dd$longitude >= -6.0 & dd$longitude <= -4.0, ]
+
+notmedium <- dd[dd$water.noise != 'medium', ]
+
+```
+
+
+### Q10
+
+```{r 10, echo=TRUE, include=TRUE}
+octlowmed <- dd[dd$water.noise == 'low' & dd$month == 'October' & dd$gradient > median(dd$gradient, na.rm=T), ]
+```
+
+
+### Q11
+
+```{r 11, echo=TRUE, include=TRUE}
+depthnmean <- dd[dd$depth > 1500 & dd$number.whales > mean(dd$number.whales, na.rm=T), ]
+# problem: mean may be recalculated for every row
+#better:
+meannrwhales <- mean(dd$number.whales, na.rm=T)
+depthnmean2 <- dd[dd$depth > 1500 & dd$number.whales > meannrwhales, ]
+```
+
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
