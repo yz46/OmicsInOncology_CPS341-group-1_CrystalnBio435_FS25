@@ -359,6 +359,15 @@ log(myNumber)</code></pre>
 <pre class="r"><code># log10
 log10(myNumber)</code></pre>
 <pre><code>## [1] 1.094471</code></pre>
+<pre class="r"><code># log2
+log2(myNumber)</code></pre>
+<pre><code>## [1] 3.635754</code></pre>
+<pre class="r"><code># squareroot
+sqrt(myNumber)</code></pre>
+<pre><code>## [1] 3.525621</code></pre>
+<pre class="r"><code>#natural antilog 
+exp(myNumber)</code></pre>
+<pre><code>## [1] 250196</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level1" number="2">
@@ -374,6 +383,41 @@ en_US.UTF-8||en_US.UTF-8||en_US.UTF-8||C||en_US.UTF-8||en_US.UTF-8</p>
 readr(v.2.1.5)</p>
 <p><strong>loaded via a namespace (and not attached):</strong>
 <em>vctrs(v.0.6.5)</em>, <em>cli(v.3.6.3)</em>, <em>knitr(v.1.49)</em>, <em>rlang(v.1.1.5)</em>, <em>xfun(v.0.50)</em>, <em>jsonlite(v.1.8.9)</em>, <em>glue(v.1.8.0)</em>, <em>htmltools(v.0.5.8.1)</em>, <em>sass(v.0.4.9)</em>, <em>hms(v.1.1.3)</em>, <em>rmarkdown(v.2.29)</em>, <em>pander(v.0.6.5)</em>, <em>evaluate(v.1.0.3)</em>, <em>jquerylib(v.0.1.4)</em>, <em>tibble(v.3.2.1)</em>, <em>tzdb(v.0.4.0)</em>, <em>fastmap(v.1.2.0)</em>, <em>yaml(v.2.3.10)</em>, <em>lifecycle(v.1.0.4)</em>, <em>bookdown(v.0.42)</em>, <em>compiler(v.4.4.2)</em>, <em>Rcpp(v.1.0.14)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>digest(v.0.6.37)</em>, <em>R6(v.2.5.1)</em>, <em>pillar(v.1.10.1)</em>, <em>magrittr(v.2.0.3)</em>, <em>bslib(v.0.9.0)</em>, <em>tools(v.4.4.2)</em> and <em>cachem(v.1.1.0)</em></p>
+<pre class="r"><code>#assign the radius
+r &lt;- 20/2
+#area circle 
+(area_circle &lt;- pi*r^2)</code></pre>
+<pre><code>## [1] 314.1593</code></pre>
+<pre class="r"><code>#cube root
+result &lt;- (14*0.51)^(1/3)
+print (result)</code></pre>
+<pre><code>## [1] 1.9256</code></pre>
+<pre class="r"><code>#create a vector
+weight &lt;- c(69,62,57,59,64,56,66,67,66)
+
+#display the vector
+print (weight)</code></pre>
+<pre><code>## [1] 69 62 57 59 64 56 66 67 66</code></pre>
+<pre class="r"><code>vec_mean &lt;- mean (weight)
+print(vec_mean)</code></pre>
+<pre><code>## [1] 62.88889</code></pre>
+<pre class="r"><code>var(weight)</code></pre>
+<pre><code>## [1] 21.61111</code></pre>
+<pre class="r"><code>sd (weight)</code></pre>
+<pre><code>## [1] 4.648775</code></pre>
+<pre class="r"><code>range(weight)</code></pre>
+<pre><code>## [1] 56 69</code></pre>
+<pre class="r"><code>length(weight)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="r"><code>first_five &lt;- weight [1:5]
+print (first_five)</code></pre>
+<pre><code>## [1] 69 62 57 59 64</code></pre>
+<pre class="r"><code>#create vector 
+height &lt;- c(112,102,83,84,99,90,77,112,133,112)
+
+#display the vector
+print(height)</code></pre>
+<pre><code>##  [1] 112 102  83  84  99  90  77 112 133 112</code></pre>
 </div>
 
 

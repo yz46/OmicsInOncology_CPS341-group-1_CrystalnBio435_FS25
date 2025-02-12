@@ -18,7 +18,7 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 2
 * from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=TRUE, include=TRUE}
+```{r myN1, echo=TRUE, include=TRUE}
 myNumber <- 12.43
 
 # do some calculations
@@ -31,15 +31,15 @@ log(myNumber)
 log10(myNumber)
 ```
 
-```{r lg10, echo=TRUE, include=TRUE}
-# log10
+```{r lg2, echo=TRUE, include=TRUE}
+# log2
 log2(myNumber)
 ```
 ```{r myN, echo=TRUE, include=TRUE}
 # squareroot
 sqrt(myNumber)
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r myN2, echo=TRUE, include=TRUE}
 #natural antilog 
 exp(myNumber)
 ```
