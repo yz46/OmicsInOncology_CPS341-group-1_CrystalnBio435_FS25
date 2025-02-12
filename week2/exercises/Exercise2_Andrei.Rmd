@@ -38,6 +38,59 @@ pander::pander(sessionInfo())
 ```
 
 
+```{r}
+#Ex 3
+# Define the radius
+radius <- 20 / 2  # Diameter is 20 cm, so radius is 10 cm
 
+# Calculate the area
+area_circle <- pi * radius^2
 
+# Print the result
+area_circle
+```
+```{r}
+#Ex 5
+weight <-c(62, 57, 59, 59, 64, 56, 66, 67, 66)
+print(weight)
+```
+```{r}
+#Ex6
+weight <-c(62, 57, 59, 59, 64, 56, 66, 67, 66)
+print(weighted.mean(weight))
+print(var(weight))
+print(sd(weight))
+first_five <- weight[1:5]
+print (first_five)
+```
+
+```{r}
+#Ex7
+height <-c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+summary (height)
+some_child <- height[c(2,3,9,10)]
+print (some_child)
+shorter_child <-height[height<=99]
+print(shorter_child)
+
+```
+
+```{r}
+#Ex8
+height_m <-height/100
+bmi <-weight/(height_m^2)
+print(bmi)
+```
+
+```{r}
+#Ex9
+seq1 <- seq(from = 0, to = 1, by = 0.1)
+print (seq1)
+```
+
+```{r}
+#Ex10
+seq2 <- seq(from = 0, to = 1, by = 0.5)
+print(seq2)
+```
 
