@@ -1,0 +1,132 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr)
+library(tidyverse)
+# make sure your R has this library loaded, if not install it (see line above)
+```
+
+### Q4
+
+```{r 4, echo=TRUE, include=TRUE}
+#file.choose()
+dd <- read.delim("/Users/lish/Desktop/data_omics/squid1.txt")
+head(dd)
+```
+
+### Q5
+
+```{r 5, echo=TRUE, include=TRUE}
+#nr of observations
+nrow(dd)
+#nr of variables
+ncol(dd)
+
+#modify dd with factors
+dd$year.f <- as.factor(dd$year)
+dd$month.f <- as.factor(dd$month)
+dd$maturity.stage.f <- as.factor(dd$maturity.stage)
+str(dd)
+```
+
+### Q9
+
+```{r 9, echo=TRUE, include=TRUE}
+#scatter plot shows rather exponential relationship
+#pdf("DML_vs_Weight_alicia_weber.pdf", width = 6, height = 4)
+plot(dd$DML, dd$weight, 
+     xlab = "DML", 
+     ylab = "Weight", 
+     main = "Scatterplot of DML vs. Weight", pch=20, col = "darkred")
+#dev.off()
+
+#transformation
+dd$DML.log <- log(dd$DML)
+dd$weight.log <- log(dd$weight)
+dd$DML.sqrt <- sqrt(dd$DML)
+dd$weight.sqrt <- sqrt(dd$weight)
+
+#plot log transf
+#pdf("DML_vs_Weight_log_alicia_weber.pdf", width = 6, height = 4)
+plot(dd$DML.log, dd$weight.log, 
+     xlab = "log DML", 
+     ylab = "log Weight", 
+     main = "Scatterplot of log transformed DML vs. Weight", pch=20, col = "darkred")
+#dev.off()
+
+#plot sqrt transf
+#pdf("DML_vs_Weight_sqrt_alicia_weber.pdf", width = 6, height = 4)
+plot(dd$DML.sqrt, dd$weight.sqrt, 
+     xlab = "sqrt DML", 
+     ylab = "sqrt Weight", 
+     main = "Scatterplot of sqrt transformed DML vs. Weight", pch=20, col = "darkred")
+#dev.off()
+
+#log transformation works best
+```
+
+### Q10
+
+```{r 10, echo=TRUE, include=TRUE}
+#pdf("Boxplot_DML_Maturity_alicia_weber.pdf", width = 6, height = 4)
+ggplot(dd, aes(x = factor(maturity.stage.f), y = DML)) +
+  geom_boxplot() +
+  labs(x = "Maturity Stage", y = "DML", 
+       title = "Differences in DML at Each Maturity Stage")
+#dev.off()
+
+#pdf("Violinplot_DML_Maturity_alicia_weber.pdf", width = 6, height = 4)
+ggplot(dd, aes(x = maturity.stage.f, y = DML)) +
+  geom_violin(trim = FALSE, fill = "lightblue", color = "black") +
+  labs(x = "Maturity Stage", y = "DML", 
+       title = "Differences in DML at Each Maturity Stage")
+#dev.off()
+```
+### Q12, used ChatGPT help
+
+```{r 12, echo=TRUE, include=TRUE}
+# Histogram
+panel.hist <- function(x, ...) {
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(usr[1:2], 0, 1.5))
+  h <- hist(x, plot = FALSE)
+  breaks <- h$breaks
+  nB <- length(breaks)
+  y <- h$counts / max(h$counts)
+  rect(breaks[-nB], 0, breaks[-1], y, col = "lightgray", ...)
+}
+
+# Correlation
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor = 1.2, ...) {
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r <- cor(x, y, use = "complete.obs")
+  txt <- formatC(r, format = "f", digits = digits)
+  txt <- paste0(prefix, txt)
+  text(0.5, 0.5, txt, cex = cex.cor * abs(r))
+}
+
+# pairs function
+pairs(dd[, c(5, 8, 9, 11, 12, 13)], 
+      diag.panel = panel.hist, 
+      upper.panel = panel.cor, 
+      lower.panel = panel.smooth)
+```
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
