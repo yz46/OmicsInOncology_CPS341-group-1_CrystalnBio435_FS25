@@ -19,6 +19,10 @@ install.packages("readr")
 library(readr)
 ```
 
+#Q1
+R script or R markdown?
+
+
 # Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
