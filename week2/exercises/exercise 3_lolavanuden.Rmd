@@ -1,0 +1,52 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 3
+* from https://alexd106.github.io/intro2R/exercise_3.html
+##task 4 is reading 
+##task 5
+```{r myN, echo=FALSE, include=TRUE}
+whale <- read.table ('../data4exercises/mywhaledata.tsv', header=TRUE)
+whale 
+```
+##task 7
+```{r , echo=FALSE, include=TRUE}
+summary (whale)
+#only number.whales is missing 1 value 
+``` 
+#task 9 
+```{r , echo=FALSE, include=TRUE}
+depth <- whale$depth 
+gradient <- whale$gradient
+lownoice <- whale$water.noise
+depthgreater <- (depth>1200)
+depthgreater
+highmay <- whale$month
+
+whale[whale$depth > 1200,]
+whale [whale$gradient > 200, ]
+whale [whale$water.noise == 'low', ]
+whale [whale$water.noise == '1, high']
+whale [whale$month == 'May'& whale$water.noise == 'high',]
+whale [whale$month == 'October'& whale$water.noise == 'low' & whale$gradient > median(whale$gradient),]
+whale 
+
+
+```
+```{r , echo=FALSE, include=TRUE}
+
