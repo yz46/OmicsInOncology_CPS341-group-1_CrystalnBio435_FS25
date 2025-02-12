@@ -70,3 +70,41 @@ weight <- c(69,62,57,59,64,56,66,67,66)
 #display the vector
 print (weight)
 ```
+```{r, echo=TRUE, include=TRUE}
+vec_mean <- mean (weight)
+print(vec_mean)
+```
+
+```{r, echo=TRUE, include=TRUE}
+var(weight)
+sd (weight)
+range(weight)
+length(weight)
+```
+```{r, echo=TRUE, include=TRUE}
+first_five <- weight [1:5]
+print (first_five)
+```
+```{r, echo=TRUE, include=TRUE}
+#create vector 
+height <- c(112,102,83,84,99,90,77,112,133,112)
+
+#display the vector
+print(height)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
