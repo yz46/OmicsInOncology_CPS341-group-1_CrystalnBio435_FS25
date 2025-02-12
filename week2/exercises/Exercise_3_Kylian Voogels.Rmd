@@ -18,17 +18,29 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 2
 * from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=FALSE, include=TRUE}
-myNumber <- 12.43
 
-# do some calculations
-# natural log
-log(myNumber)
+```{r, echo=TRUE, include=TRUE}
+#whaledata exercise 3
+whale <- read.table('../data4exercises/mywhaledata.tsv', header = TRUE)
+#only number.whales is missing 1 value
+verydeep <- whale[depth>1200,]
+silent <- whale[whale$water.noise =='low',]
+steep <- whale[whale$gradient>200,]
+silent
+steep
 ```
 
-```{r lg10, echo=TRUE, include=TRUE}
-# log10
-log10(myNumber)
+```{r, echo=TRUE, include=TRUE}
+#the data where the month is may and the noise is high
+highmay <- whale[whale$month == 'May'& whale$water.noise == 'high',]
+highmay
+```
+```{r, echo=TRUE, include=TRUE}
+october <- whale[whale$month == 'October'& whale$water.noise == 'low' & whale$gradient>median(whale$gradient),]
+october
+```
+```{r, echo=TRUE, include=TRUE}
+
 ```
 
 # Session Information
