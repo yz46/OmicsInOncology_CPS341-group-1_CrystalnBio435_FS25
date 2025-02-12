@@ -29,12 +29,82 @@ log(myNumber)
 ```{r lg10, echo=TRUE, include=TRUE}
 # log10
 log10(myNumber)
-```
-
 # Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
 pander::pander(sessionInfo())
+```
+
+```{r log2, echo=TRUE, include=TRUE}
+log2(myNumber)
+```
+
+```{r sqrt, echo=TRUE, include=TRUE}
+sqrt(myNumber)
+```
+
+```{r exponent, echo=TRUE, include=TRUE}
+exp(myNumber)
+```
+
+```{r cricle, echo=TRUE, include=TRUE}
+area_circle <- pi*(10^2)
+```
+
+```{r weight, echo=TRUE, include=TRUE}
+weight <- c(62, 57, 59, 59, 64, 56, 66, 67, 66)
+```
+
+```{r mean, echo=TRUE, include=TRUE}
+mean(weight)
+```
+
+```{r variance, echo=TRUE, include=TRUE}
+var(weight)
+```
+
+```{r sd, echo=TRUE, include=TRUE}
+sd(weight)
+```
+
+```{r range, echo=TRUE, include=TRUE}
+range(weight)
+```
+
+```{r lenght, echo=TRUE, include=TRUE}
+length(weight)
+```
+
+```{r first five, echo=TRUE, include=TRUE}
+first_five <- weight[c(1,2,3,4,5)]
+```
+
+```{r height,echo= TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+```
+
+```{r summary, echo=TRUE, include=TRUE}
+summary(height)
+```
+
+```{r some children, echo=TRUE, include=TRUE}
+some_child <- height[c(2,3,9,10)]
+```
+
+```{r shorter, echo=TRUE, include=TRUE}
+shorter_child <- height[height<99]
+```
+
+```{r bmi, echo=TRUE, include=TRUE}
+bmi <- weight*(height/100)
+```
+
+```{r seq1, echo=TRUE, include=TRUE}
+seq1 <- seq(from=0, to=1, by=0.1)
+```
+
+```{r seq2, echo=TRUE, include=TRUE}
+seq2 <- seq(from=10, to=1, by=-0.5)
 ```
 
 
