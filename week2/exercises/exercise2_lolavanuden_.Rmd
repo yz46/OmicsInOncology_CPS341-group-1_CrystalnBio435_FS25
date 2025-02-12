@@ -30,8 +30,73 @@ log(myNumber)
 # log10
 log10(myNumber)
 ```
+```{r, echo=TRUE, include=TRUE}
+log2(myNumber)
+```
+```{r echo=TRUE, include=TRUE}
+sqrt (myNumber)
+```
+```{r echo=TRUE, include=TRUE}
+exp(myNumber)
+```
+##task 3
+```{r echo=TRUE, include=TRUE}
+area_circle <- (pi*20^2)
+print(area_circle)
+```
+##task 5
+```{r echo=TRUE, include=TRUE}
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+mean (weight)
+var (weight)
+sd(weight)
+range(weight)
+length(weight)
 
-# Session Information
+```
+```{r echo=TRUE, include=TRUE}
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+first_five <- weight[1:5]
+
+first_five
+```
+##task 7
+```{r echo=TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+summary (height)
+```
+```{r echo=TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+some_height <- height [c(2, 3, 9, 10)]
+some_height 
+```
+```{r echo=TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+shorter_child <- height [3:7] 
+shorter_child
+```
+```{r echo=TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+meter_values <- height/100
+print (meter_values)
+```
+##task 8
+```{r echo=TRUE, include=TRUE}
+BMI <- weight/meter_values 
+BMI 
+```
+
+##task 9
+```{r echo=TRUE, include=TRUE}
+seq1 <- seq(from = 0, to = 1, by = 0.1)
+seq1
+``` 
+##task 10
+```{r echo=TRUE, include=TRUE}
+seq2 <- seq(from = 1, to = 10, by = 0.5)
+rev(seq2)
+``` 
+#Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
 pander::pander(sessionInfo())
