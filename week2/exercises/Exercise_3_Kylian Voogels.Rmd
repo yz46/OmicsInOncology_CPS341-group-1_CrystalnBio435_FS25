@@ -23,25 +23,56 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 #whaledata exercise 3
 whale <- read.table('../data4exercises/mywhaledata.tsv', header = TRUE)
 #only number.whales is missing 1 value
+#exercise 3.9 depth bigger than 1200
 verydeep <- whale[depth>1200,]
+verydeep
+```
+
+```{r, echo=TRUE, include=TRUE}
+#exercise 3.9 water noise = low
 silent <- whale[whale$water.noise =='low',]
-steep <- whale[whale$gradient>200,]
 silent
+```
+
+```{r, echo=TRUE, include=TRUE}
+#exercise 3.9 gradient higher than 200
+steep <- whale[whale$gradient>200,]
 steep
 ```
 
 ```{r, echo=TRUE, include=TRUE}
-#the data where the month is may and the noise is high
+#Exercise 3.9 month is may and the noise is high
 highmay <- whale[whale$month == 'May'& whale$water.noise == 'high',]
 highmay
 ```
 ```{r, echo=TRUE, include=TRUE}
+#Exercise 3.9; month October, water noise low, gradient hgher than mean.
 october <- whale[whale$month == 'October'& whale$water.noise == 'low' & whale$gradient>median(whale$gradient),]
 october
 ```
 ```{r, echo=TRUE, include=TRUE}
-
+#exercise 3.9 between lat 60-61 and lon -4 - -6
+latlon <- whale[whale$latitude>=60 & whale$latitude<=61 & whale$longitude>=-6 & whale$longitude<=-4,]
+lonlat <- whale%>%
+    filter(between(whale$latitude, 60, 61) & between(whale$longitude, -6, -4))
+lonlat
 ```
+```{r, echo=TRUE, include=TRUE}
+#exercise 9 exclude medium noise
+nomed <- whale[whale$water.noise !='medium',]
+nomed
+```
+```{r, echo=TRUE, include=TRUE}
+#exercise 3.9 modify mean median
+modmed <- whale[whale$gradient>median(whale$gradient),]
+modmed
+```
+```{r, echo=TRUE, include=TRUE}
+#exercise 3.10 depth and number of whales spotter troubleshooting.
+deepspot <- whale[whale$depth > 1500 & whale$number.whales >mean(whale$number.whales, na.rm = TRUE),]
+deepspot
+```
+
 
 # Session Information
 
