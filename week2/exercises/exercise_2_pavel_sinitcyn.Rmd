@@ -18,7 +18,9 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 2
 * from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=FALSE, include=TRUE}
+
+### Q2
+```{r, echo=TRUE, include=TRUE }
 myNumber <- 12.43
 
 # do some calculations
@@ -31,6 +33,18 @@ log(myNumber)
 log10(myNumber)
 ```
 
+```{r, echo=TRUE, include=TRUE}
+log2(myNumber)
+log(myNumber, 2)
+```
+
+```{r, echo=TRUE, include=TRUE}
+sqrt(myNumber)
+```
+
+```{r, echo=TRUE, include=TRUE}
+# TODO antilog
+```
 # Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
