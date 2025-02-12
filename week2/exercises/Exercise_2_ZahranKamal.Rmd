@@ -10,9 +10,14 @@ bibliography: bibliography.bib
 ---
 
 ```{r load libraries, include=FALSE}
-# install readr from CRAN
+# Set CRAN mirror
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+# Install readr from CRAN
 install.packages("readr")
-library(readr) # make sure your R has this library loaded, if not install it (see line above)
+
+# Load the library
+library(readr)
 ```
 
 # Exercises for the R-Beginner - The fancy calculator
