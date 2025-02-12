@@ -3,7 +3,7 @@ title: "Week 2: Starting with R"
 author: "UZH n UU: tested by Jonas"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  bookdown::html_document2: default 
+  bookdown::html_document2: default  
   bookdown::pdf_document2: default
 bibliography: bibliography.bib
 ---
