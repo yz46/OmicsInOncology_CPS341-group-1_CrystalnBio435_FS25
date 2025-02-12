@@ -15,7 +15,7 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 ```
 
 ### Q4 & Q5
-```{r myN, echo=FALSE, include=TRUE}
+```{r myN, echo=TRUE, include=TRUE}
 #file.choose()
 dd <- read.csv("/Users/lish/Desktop/data_omics/whaledata.csv", sep=';')
 head(dd)
