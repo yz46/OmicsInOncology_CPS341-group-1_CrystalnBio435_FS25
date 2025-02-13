@@ -29,24 +29,44 @@ whale
 summary (whale)
 #only number.whales is missing 1 value 
 ``` 
-#task 9 
-```{r , echo=FALSE, include=TRUE}
-depth <- whale$depth 
-gradient <- whale$gradient
-lownoice <- whale$water.noise
-depthgreater <- (depth>1200)
-depthgreater
-highmay <- whale$month
-
-whale[whale$depth > 1200,]
-whale [whale$gradient > 200, ]
-whale [whale$water.noise == 'low', ]
-whale [whale$water.noise == '1, high']
-whale [whale$month == 'May'& whale$water.noise == 'high',]
-whale [whale$month == 'October'& whale$water.noise == 'low' & whale$gradient > median(whale$gradient),]
-whale 
-
-
+##task 9 
+```{r , echo=TRUE, include=TRUE}
+greaterdepth <- whale[whale$depth > 1200,]
+greaterdepth
 ```
-```{r , echo=FALSE, include=TRUE}
 
+```{r , echo=TRUE, include=TRUE}
+steep <- whale [whale$gradient > 200, ]
+steep
+``` 
+```{r , echo=TRUE, include=TRUE}
+silent <- whale [whale$water.noise == 'low', ]
+silent
+```
+```{r , echo=TRUE, include=TRUE}
+highmay <- whale [whale$month == 'May'& whale$water.noise == 'high',]
+highmay
+```
+```{r , echo=TRUE, include=TRUE}
+oktober <- whale [whale$month == 'October'& whale$water.noise == 'low' & whale$gradient > median(whale$gradient),]
+oktober
+```
+```{r , echo=TRUE, include=TRUE}
+latlon <-whale [whale$latitude >= 60 & whale$latitude <= 61 & whale$longitude >= -6 & whale$longitude <=-4,]
+latlon
+```
+
+```{r , echo=TRUE, include=TRUE}
+nomedium <- whale[whale$water.noise != 'medium',]
+nomedium
+```
+##task 10
+```{r , echo=TRUE, include=TRUE}
+modifiedmedium <- whale [whale$gradient > median(whale$gradient),]
+modifiedmedium
+```
+##task 11
+```{r , echo=TRUE, include=TRUE}
+deepspot <- whale[whale$depth > 1500 & whale$number.whales > mean (whale$number.whales, na.rm = TRUE),]
+deepspot
+```
