@@ -1,6 +1,6 @@
 ---
 title: "Exercise 5"
-author: "Alicia"
+author: "Alicia Weber"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2: default
@@ -15,7 +15,7 @@ library(tidyverse)
 library(ggfortify)
 ```
 
-### Q1
+# Q1
 ```{r myN, echo=TRUE, include=TRUE}
 #file.choose()
 dd <- read.csv("/Users/lish/Desktop/data_omics/prawnGR.CSV")
@@ -32,7 +32,7 @@ dd %>%
   count(diet)
 ```
 
-### Q2
+# Q2
 
 ```{r 2, echo=TRUE, include=TRUE}
 #t-test
@@ -45,7 +45,7 @@ var.test(dd$GRate[dd$diet == 'Natural'], dd$GRate[dd$diet == 'Artificial'])
 #both seem normally distributed and variances appear equal
 #could proceed with a student's t-test
 ```
-### Q3
+# Q3
 
 ```{r 3, echo=TRUE, include=TRUE}
 #could proceed with a student's t-test
@@ -60,14 +60,14 @@ p = 0.1901:                        H0 not rejected, no significant difference in
 95% CI: (-0.613962, 0.1283495):   includes 0, supports that no signf. difference
 
 
-### Q4
+# Q4
 
 ```{r 4, echo=TRUE, include=TRUE}
 m1 <- lm(GRate ~ diet, data=dd)
 summary(m1)
 ```
 
-### Q5
+# Q5
 
 ```{r 5, echo=TRUE, include=TRUE}
 anova(m1)
@@ -81,7 +81,7 @@ comparing t-test and anova:
 - F(1, 58) = 1.7579, p = 0.1901: no statistically significant difference in the mean growth rates
 -> diet type did not have a measurable impact
 
-### Q6
+# Q6
 
 ```{r 6, echo=TRUE, include=TRUE}
 autoplot(m1)
@@ -90,7 +90,7 @@ autoplot(m1)
 assumptions of normality, linearity, and equal variance are met, minor deviations in the Q-Q plot and a few potential outliers that likely don't affect model validity
 
 
-### Q7
+# Q7
 
 ```{r 7, echo=TRUE, include=TRUE}
 #file.choose()
@@ -115,7 +115,7 @@ ggplot(dd2, aes(x = diatom.treat, y = diameter, fill = diatom.treat)) +
   guides(fill = "none")
 
 ```
-### Q8, 9, 10
+# Q8, 9, 10
 
 ```{r 8, echo=TRUE, include=TRUE}
 m2 <- lm(diameter ~ diatom.treat, data=dd2)
@@ -132,7 +132,7 @@ H0 = There is no significant difference in the mean diameter of Metacarpus
 significant difference in the mean diameter of Metacarpus across the four treatment groups, F(3, 36) = 22.775, p < 0.001.
 
 
-### Q11
+# Q11
 
 ```{r 11, echo=TRUE, include=TRUE}
 autoplot(m2)
@@ -141,7 +141,7 @@ autoplot(m2)
 acceptable
 
 
-### Q12, 13, 14
+# Q12, 13, 14
 
 ```{r 12, echo=TRUE, include=TRUE}
 tukey <- TukeyHSD(aov(m2))
@@ -155,7 +155,7 @@ plot(tukey, las = 1)
 - ASGM and Sstat show the largest differences.
 
 
-### Q15
+# Q15
 
 ```{r 15, echo=TRUE, include=TRUE}
 #file.choose()
@@ -169,7 +169,7 @@ nrow(dd3) #nr observations
 dependent: beat rate
 explanatory: temp
 
-### Q16
+# Q16
 
 ```{r 16, echo=TRUE, include=TRUE}
 dd3$Facclimatisation_temp <- as_factor(dd3$acclimitisation_temp)
@@ -199,7 +199,7 @@ rate of increase in beat rate with temp appears steeper in 5,10 than in 20:
 suggests acclimatisation temp influences intercept and also rate at which beat rate changes with temperature.
 
 
-### Q17, 18, 19
+# Q17, 18, 19
 
 ```{r 17, echo=TRUE, include=TRUE}
 #slopes were not parallel, interaction term!
@@ -214,7 +214,7 @@ anova(m4)
 
 -> we could run separate models for each acclimatisation temperature
 
-### Q20
+# Q20
 
 ```{r 18, echo=TRUE, include=TRUE}
 autoplot(m4)
@@ -224,7 +224,7 @@ autoplot(m4)
 - minor non-normality
 - no strong outliers
 
-### Q21
+# Q21
 
 
 - Linear model with interaction term tested effects of temp and Facclimatisation_temp on beat_rate
