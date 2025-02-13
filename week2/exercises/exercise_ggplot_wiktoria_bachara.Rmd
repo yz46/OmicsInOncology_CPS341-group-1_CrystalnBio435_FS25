@@ -1,0 +1,120 @@
+---
+title: "exercise_ggplot_wiktoria_bachara"
+output: html_document
+---
+```{r load libraries, include=FALSE}
+library(readr)
+library(tidyverse)
+```
+
+```{r, echo=TRUE, include=TRUE}
+#file.choose()
+mpg_df <- mpg
+mpg_df %>% head()
+```
+
+#render plot background
+```{r, echo=TRUE, include=TRUE}
+mpg_df %>% ggplot(aes(x = cty, y = displ)) + geom_point(aes(colour = class))  
+
+```
+
+# Create the boxplot with jittered points
+```{r, echo=TRUE, include=TRUE}
+ggplot(mpg, aes(x = class, y = displ)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = manufacturer), width = 0.2, alpha = 0.7) +
+  theme_classic() +
+  labs(x = "Class of the car", y = "Engine size, L", color = "Manufacturer") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+#pipes exercise
+```{r, echo=TRUE, include=TRUE}
+ # Load the tidyverse package
+library(dplyr) 
+# Calculate the mean engine size using pipes
+mean_engine_size <- mpg %>%
+  select(displ) %>%  # Select only the 'displ' column
+  pull() %>%  # Extract it as a vector
+  mean(na.rm = TRUE)  # Compute the mean, ignoring NA values
+
+# Print the result
+print(mean_engine_size)
+```
+
+#exercise7
+```{r, echo=TRUE, include=TRUE}
+# area of a circle
+# the equation to calculate the area of a circle is pi * radius^2
+
+circle.area <- function(d){ 
+    pi * (d/2)^2}
+
+# to use your new function
+
+circle.area(10)
+```
+```{r, echo=TRUE, include=TRUE}
+# a vector with diameters ranging from 0 to 50 in steps of 10
+
+cir.diam <- seq(from = 0, to = 50, by = 10)
+
+# testing function
+
+circle.area(cir.diam)
+```
+
+```{r, echo=TRUE, include=TRUE}
+#converting farenheit to centegrade
+far.cent <- function(a) {
+    val <- (a - 32) * 5/9
+    print(paste("Fahrenheit: ", round(a, digits = 3), "oF", sep = " "), quote = FALSE)  # round 3dp
+    print(paste("Centigrade: ", round(val, digits = 3), "oC", sep = " "), quote = FALSE)  # round 3dp
+}
+```
+
+```{r, echo=TRUE, include=TRUE}
+# calculate a median
+
+ourmedian <- function(x){
+    n <- length(x)
+    if (n %% 2 == 1)      # odd numbers
+      sort(x)[(n + 1)/2]  # find the middle number by adding 1 to length and div 2
+    else {                # even numbers
+      middletwo <- sort(x)[(n/2) + 0:1]   #find the two middle numbers
+      mean(middletwo)
+      }
+}
+
+# use the function
+mydat <- sample(1:50, size = 10, replace = TRUE )
+
+# our function
+ourmedian(mydat)
+
+# R median function
+median(mydat)
+```
+
+```{r, echo=TRUE, include=TRUE}
+# function to simulate Ricker model
+
+Ricker.model <- function(nzero, r, time, K = 1) {
+    # sets initial parameters
+    N <- numeric(time + 1)  # creates a real vector of length time+1 to store values of Nt+1
+    N[1] <- nzero  # sets initial population size in first element of N
+    for (i in 1:time) {
+        # loops over time
+        N[i + 1] <- N[i] * exp(r * (1 - N[i]/K))
+    }
+    Time <- 0:time  # creates vector for x axis
+    plot(Time, N, type = "o", xlim = c(0, time), xlab = "Time", ylab = "Population size (N)", main = paste("r =",
+        r, sep = " "))  # plots     output
+}
+
+# To run play around with the different parameters, especially r
+Ricker.model(nzero = 0.1, r = 1, time = 100)
+```
+
+

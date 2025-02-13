@@ -1,0 +1,50 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+library(readr)
+library(tidyverse)
+```
+
+### Recreating engine size per car class plot
+
+```{r plot, echo=TRUE, include=TRUE}
+#file.choose()
+dd <- mpg
+head(dd)
+
+# Create the boxplot with jittered points
+ggplot(mpg, aes(x = class, y = displ)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = manufacturer), width = 0.2, alpha = 0.7) +
+  theme_classic() +
+  labs(x = "Class of the car", y = "Engine size, L", color = "Manufacturer") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    coord_cartesian(ylim = c(0, 10))
+
+```
+
+### Exercise rewriting using pipes
+
+```{r pipe, echo=TRUE, include=TRUE}
+dd %>%
+  select(displ) %>%
+  pull() %>%
+  mean() 
+```
+
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
