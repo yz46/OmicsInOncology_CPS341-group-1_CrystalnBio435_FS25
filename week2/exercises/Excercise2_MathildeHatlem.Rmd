@@ -18,6 +18,8 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 2
 * from https://alexd106.github.io/intro2R/exercise_2.html
+
+### Part 2 
 ```{r myN, echo=FALSE, include=TRUE}
 myNumber <- 12.43
 
@@ -30,6 +32,97 @@ log(myNumber)
 # log10
 log10(myNumber)
 ```
+```{r, echo=TRUE, include=TRUE}
+# log2
+log2(myNumber)
+```
+
+```{r, echo=TRUE, include=TRUE}
+# sqrt
+sqrt(myNumber)
+```
+```{r, echo=TRUE, include=TRUE}
+# natural antilog
+exp(myNumber)
+```
+### Part 3
+```{r, echo=TRUE, include=TRUE}
+# area of circle
+radius <- 10
+area_circle = pi * 2 * radius
+print(area_circle)
+```
+### Part 4
+```{r, echo=TRUE, include=TRUE}
+# cube root
+(14 * 0.51)^(1/3)
+```
+### Part 5
+```{r, echo=TRUE, include=TRUE}
+# vector
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+```
+### Part 6
+```{r, echo=TRUE, include=TRUE}
+# calculations with vector
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+
+mean_weight <- mean(weight)
+print(mean_weight)
+
+var_weight <- var(weight)
+print(var_weight)
+
+sd_weight <- sd(weight)
+print(sd_weight)
+
+range_weight <- range(weight)
+print(range_weight)
+
+num_children <- length(weight)
+print(num_children)
+
+first_five <- weight[1:5]
+print(first_five)
+```
+### Part 7
+```{r, echo=TRUE, include=TRUE}
+# calculation with height
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+print(summary(height))
+
+some_children <- height[c(2,3,9,10)]
+print(some_children)
+print(summary(some_children))
+
+shorter_children <- height[height <= 99]
+print(shorter_children)
+
+
+
+```
+### Part 8
+```{r, echo=TRUE, include=TRUE}
+# vectorisation
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+bmi <- weight / ((height/100)^2)
+print(bmi)
+```
+### Part 9
+```{r, echo=TRUE, include=TRUE}
+# making a sequence
+seq1 <- seq(from=0, to=1, by=0.1)
+print(seq1)
+```
+### Part 10
+```{r, echo=TRUE, include=TRUE}
+# making a sequence 2
+seq2 <- seq(from=1, to=10, by=0.5)
+seq2_cor <- rev(seq2)
+print(seq2_cor)
+```
+
 
 # Session Information
 
