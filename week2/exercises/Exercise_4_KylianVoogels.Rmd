@@ -18,17 +18,62 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 2
 * from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=FALSE, include=TRUE}
-myNumber <- 12.43
-
-# do some calculations
-# natural log
-log(myNumber)
+```{r, echo=TRUE, include=TRUE}
+squid <- read.table('../data4exercises/squid1.txt', header = TRUE)
+str(squid)
+summary(squid)
+#exercise 4.4, 519 observations and 13 variables
 ```
-
-```{r lg10, echo=TRUE, include=TRUE}
-# log10
-log10(myNumber)
+```{r, echo=TRUE, include=TRUE}
+#exercise 4.4 recode to factors
+squid$maturity.stage <- as.factor(squid$maturity.stage)
+squid$year <- as.factor(squid$year)
+squid$month <- as.factor(squid$month)
+```
+```{r, echo=TRUE, include=TRUE}
+str(squid)
+```
+```{r, echo=TRUE, include=TRUE}
+#exercise 4.5 month-year table
+monthyear <- xtabs(~ squid$year + squid$month, data = squid)
+monthyear
+```
+```{r, echo=TRUE, include=TRUE}
+#exercise 4.5 month-year-maturity stage table
+obstab <- ftable(squid$month ~ squid$year + squid$maturity.stage)
+obstab
+```
+```{r, echo=TRUE, include=TRUE}
+#exercise 4.9 scatterplots
+scatter <- plot(squid$DML, squid$weight,      
+xlab = "Dorsal Mantle Length (DML)",      
+ylab = "Weight",      
+main = "Scatterplot of DML vs. Weight",     
+pch = 19, col = "red")
+#the plot is scaling exponentially so transforming with log is useful here.
+logw <- log(squid$weight)
+scatterlog <- plot(squid$DML, logw,      
+xlab = "Dorsal Mantle Length (DML)",      
+ylab = "log(Weight)",      
+main = "Scatterplot of DML vs. Weight",     
+pch = 19, col = "green")
+sqrtw <- sqrt(squid$weight)
+scatterlog <- plot(squid$DML, sqrtw,      
+xlab = "Dorsal Mantle Length (DML)",      
+ylab = "sqrt(Weight)",      
+main = "Scatterplot of DML vs. Weight",     
+pch = 19, col = "yellow")
+#the sqrt plot best straigtens the data out.
+```
+```{r, echo=TRUE, include=TRUE}
+#exercise 4.10 boxplot
+pdf("DML_vs_Weight_Transformations.pdf")
+```
+```{r, echo=TRUE, include=TRUE}
+boxplot(squid$DML~ squid$maturity.stage,)
+        main = 'Boxplot of DML by maturity stage'
+        xlab = "Maturity stage"
+        ylab = "DML"
 ```
 
 # Session Information

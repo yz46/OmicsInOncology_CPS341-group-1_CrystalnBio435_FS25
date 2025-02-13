@@ -46,15 +46,15 @@ sqrt(myNumber)
 ```{r exponent, echo=TRUE, include=TRUE}
 exp(myNumber)
 ```
-
+###2.3
 ```{r cricle, echo=TRUE, include=TRUE}
 area_circle <- pi*(10^2)
 ```
-
+###2.5
 ```{r weight, echo=TRUE, include=TRUE}
 weight <- c(62, 57, 59, 59, 64, 56, 66, 67, 66)
 ```
-
+###2.6
 ```{r mean, echo=TRUE, include=TRUE}
 mean(weight)
 ```

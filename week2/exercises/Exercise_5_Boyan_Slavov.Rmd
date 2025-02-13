@@ -1,0 +1,40 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
+### Switching gears
+```{r}
+whaledata <- read.table(file="C:/Users/Admin/Documents/OmicsInOncology_Group3_new/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep="\t", stringsAsFactors = TRUE)
+library(tidyverse)
+```
+
+
+
+```{r}
+whaledata %>% ggplot(aes(x=month, y=number.whales, fill=month)) + geom_bar(stat="identity") +
+scale_fill_manual(values=c("pink", "orange")) +
+ylim(0,720) +
+xlab("Month") + ylab("Number of whales") +
+ggtitle("Number of whales per month")
+```

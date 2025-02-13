@@ -24,7 +24,7 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 whale <- read.table('../data4exercises/mywhaledata.tsv', header = TRUE)
 #only number.whales is missing 1 value
 #exercise 3.9 depth bigger than 1200
-verydeep <- whale[depth>1200,]
+verydeep <- whale[whale$depth>1200,]
 verydeep
 ```
 
@@ -53,12 +53,9 @@ october
 ```{r, echo=TRUE, include=TRUE}
 #exercise 3.9 between lat 60-61 and lon -4 - -6
 latlon <- whale[whale$latitude>=60 & whale$latitude<=61 & whale$longitude>=-6 & whale$longitude<=-4,]
-lonlat <- whale%>%
-    filter(between(whale$latitude, 60, 61) & between(whale$longitude, -6, -4))
-lonlat
 ```
 ```{r, echo=TRUE, include=TRUE}
-#exercise 9 exclude medium noise
+#exercise 3.9 exclude medium noise
 nomed <- whale[whale$water.noise !='medium',]
 nomed
 ```
