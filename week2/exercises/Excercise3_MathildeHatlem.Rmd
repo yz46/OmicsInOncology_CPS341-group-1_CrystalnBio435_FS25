@@ -1,0 +1,39 @@
+---
+title: "Excercise3_MathildeHatlem"
+output: html_document
+---
+
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner
+
+## Exercise 3
+### Part 5
+```{r myN, echo=FALSE, include=TRUE}
+whaledata <- read.table(file = 'data/whaledata.txt', header = TRUE, sep = '\t', stringsAsFactors = TRUE)
+```
+
+```{r , echo=TRUE, include=TRUE}
+
+```
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
