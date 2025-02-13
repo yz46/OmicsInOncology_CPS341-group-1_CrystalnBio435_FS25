@@ -14,12 +14,44 @@ bibliography: bibliography.bib
 library(readr) # make sure your R has this library loaded, if not install it (see line above)
 ```
 
-# Exercises for the R-Beginner - The fancy calculator
+# Switching gears
 
-## Exercise 2
-* from https://alexd106.github.io/intro2R/exercise_2.html
-```{r}
-%>% 
+```{r load libraries, include=FALSE}
+library(readr)
+library(tidyverse)
+```
+
+### Recreating engine size per car class plot
+
+```{r plot, echo=TRUE, include=TRUE}
+#file.choose()
+dd <- mpg
+head(dd)
+
+# Create the boxplot with jittered points
+ggplot(mpg, aes(x = class, y = displ)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(aes(color = manufacturer), width = 0.2, alpha = 0.7) +
+  theme_classic() +
+  labs(x = "Class of the car", y = "Engine size, L", color = "Manufacturer") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+### Exercise rewriting using pipes
+
+```{r pipe, echo=TRUE, include=TRUE}
+dd %>%
+  select(displ) %>%
+  pull() %>%
+  mean() 
+```
+
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
 ```
 
 
