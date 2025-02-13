@@ -24,7 +24,7 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 ## Exercise 3
 ### Part 5
 ```{r, echo=TRUE, include=TRUE}
-read.table("/Users/mathildehatlem/OmicsInOncology_CPS341nBio435_FS25/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+mywhaledata <- read.table("/Users/mathildehatlem/OmicsInOncology_CPS341nBio435_FS25/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep = "\t", stringsAsFactors = TRUE)
 ```
 ### Part 7
 ```{r, echo=TRUE, include=TRUE}
