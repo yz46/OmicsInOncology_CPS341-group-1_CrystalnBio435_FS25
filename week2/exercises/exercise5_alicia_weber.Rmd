@@ -1,6 +1,6 @@
 ---
-title: "Week 2: Starting with R"
-author: "UZH n UU: tested by Jonas"
+title: "Exercise 5"
+author: "Alicia"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2: default
