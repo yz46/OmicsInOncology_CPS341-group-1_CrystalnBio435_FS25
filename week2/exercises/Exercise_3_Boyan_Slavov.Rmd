@@ -39,6 +39,7 @@ pander::pander(sessionInfo())
 
 ```{r whaledata, echo=TRUE, include=TRUE}
 whaledata <- read.table(file="C:/Users/Admin/Documents/OmicsInOncology_Group3_new/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep="\t", stringsAsFactors = TRUE)
+print(whaledata)
 ```
 
 ```{r summary whale, echo=TRUE, include=TRUE}
