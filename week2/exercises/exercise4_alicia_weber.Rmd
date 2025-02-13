@@ -1,6 +1,6 @@
 ---
-title: "Week 2: Starting with R"
-author: "UZH n UU: tested by Jonas"
+title: "Exercise 4"
+author: "Alicia Weber"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2: default
@@ -16,7 +16,7 @@ library(tidyverse)
 # make sure your R has this library loaded, if not install it (see line above)
 ```
 
-### Q4
+# Q4
 
 ```{r 4, echo=TRUE, include=TRUE}
 #file.choose()
@@ -24,7 +24,7 @@ dd <- read.delim("/Users/lish/Desktop/data_omics/squid1.txt")
 head(dd)
 ```
 
-### Q5
+# Q5
 
 ```{r 5, echo=TRUE, include=TRUE}
 #nr of observations
@@ -39,7 +39,7 @@ dd$maturity.stage.f <- as.factor(dd$maturity.stage)
 str(dd)
 ```
 
-### Q9
+# Q9
 
 ```{r 9, echo=TRUE, include=TRUE}
 #scatter plot shows rather exponential relationship
@@ -75,7 +75,7 @@ plot(dd$DML.sqrt, dd$weight.sqrt,
 #log transformation works best
 ```
 
-### Q10
+# Q10
 
 ```{r 10, echo=TRUE, include=TRUE}
 #pdf("Boxplot_DML_Maturity_alicia_weber.pdf", width = 6, height = 4)
@@ -92,7 +92,7 @@ ggplot(dd, aes(x = maturity.stage.f, y = DML)) +
        title = "Differences in DML at Each Maturity Stage")
 #dev.off()
 ```
-### Q12, used ChatGPT help
+# Q12, used ChatGPT help
 
 ```{r 12, echo=TRUE, include=TRUE}
 # Histogram

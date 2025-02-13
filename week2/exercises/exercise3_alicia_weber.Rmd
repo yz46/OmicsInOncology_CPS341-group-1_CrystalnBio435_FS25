@@ -1,6 +1,6 @@
 ---
-title: "Week 2: Starting with R"
-author: "UZH n UU: tested by Jonas"
+title: "Exercise 3"
+author: "Alicia Weber"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2: default
@@ -14,14 +14,14 @@ bibliography: bibliography.bib
 library(readr) # make sure your R has this library loaded, if not install it (see line above)
 ```
 
-### Q4 & Q5
+# Q4 & Q5
 ```{r myN, echo=TRUE, include=TRUE}
 #file.choose()
 dd <- read.csv("/Users/lish/Desktop/data_omics/whaledata.csv", sep=';')
 head(dd)
 ```
 
-### Q6
+# Q6
 
 ```{r 6, echo=TRUE, include=TRUE}
 #nr of variables
@@ -32,7 +32,7 @@ class(dd$month)
 class(dd$water.noise)
 ```
 
-### Q7
+# Q7
 
 ```{r 7, echo=TRUE, include=TRUE}
 summary(dd)
@@ -40,7 +40,7 @@ summary(dd)
 ```
 
 
-### Q9
+# Q9
 
 ```{r 9, echo=TRUE, include=TRUE}
 depth1200 <- dd[dd$depth > 1200, ]
@@ -61,14 +61,14 @@ notmedium <- dd[dd$water.noise != 'medium', ]
 ```
 
 
-### Q10
+# Q10
 
 ```{r 10, echo=TRUE, include=TRUE}
 octlowmed <- dd[dd$water.noise == 'low' & dd$month == 'October' & dd$gradient > median(dd$gradient, na.rm=T), ]
 ```
 
 
-### Q11
+# Q11
 
 ```{r 11, echo=TRUE, include=TRUE}
 depthnmean <- dd[dd$depth > 1500 & dd$number.whales > mean(dd$number.whales, na.rm=T), ]
