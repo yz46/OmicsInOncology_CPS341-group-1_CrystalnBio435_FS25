@@ -1,0 +1,52 @@
+---
+title: "switchinggeras_MathildeHatlem"
+output: html_document
+---
+### test plot
+```{r, echo=TRUE, include=TRUE}
+library(ggplot2)
+library(dplyr)
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Example using mtcars dataset
+mtcars %>%
+  # Data manipulation using pipes (filter, mutate, etc.)
+  filter(mpg > 20) %>%      # Filter cars with mpg > 20
+  mutate(cyl_factor = as.factor(cyl)) %>%  # Convert 'cyl' to factor for color grouping
+  ggplot(aes(x = wt, y = mpg, color = cyl_factor, size = hp)) +  # Create scatter plot
+  geom_point() +  # Add points
+  labs(
+    title = "Fuel Efficiency vs. Weight",
+    x = "Car Weight (wt)",
+    y = "Miles per Gallon (mpg)",
+    color = "Number of Cylinders",
+    size = "Horsepower (hp)"
+  ) +
+  theme_minimal()  # Apply minimal theme
+```
+### Test plot 2
+```{r, echo=TRUE, include=TRUE}
+mtcars %>%
+  filter(mpg > 20) %>%
+  mutate(cyl_factor = as.factor(cyl)) %>%
+  ggplot(aes(x = wt, y = mpg, color = cyl_factor, size = hp)) +
+  geom_point(alpha = 0.7) +  # Points with transparency
+  geom_smooth(method = "lm", se = FALSE, color = "black") +  # Add regression line
+  labs(
+    title = "Fuel Efficiency vs. Weight (with Regression Line)",
+    subtitle = "Cars with mpg > 20",
+    x = "Car Weight (wt)",
+    y = "Miles per Gallon (mpg)",
+    color = "Number of Cylinders",
+    size = "Horsepower (hp)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 12)
+  )
+```
+
