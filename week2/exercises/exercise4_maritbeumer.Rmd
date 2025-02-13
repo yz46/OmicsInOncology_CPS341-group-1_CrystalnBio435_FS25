@@ -43,13 +43,13 @@ squid$month <- as.factor(squid$month)
 squid$maturity.stage <- as.factor(squid$maturity.stage)
 ```
 
-```{r}
+```{r }
 # Count the number of observations per month and year combination
-obs_per_month_year <- table(squidyear_factor, squidmonth_factor)
+obs_per_month_year <- table(squid$year, squid$month)
 print(obs_per_month_year)
 
 # Identify the years with the most observations
-obs_per_year <- table(squid$year_factor)
+obs_per_year <- table(squid$year)
 print(obs_per_year)
 
 # Find the year with the maximum observations
