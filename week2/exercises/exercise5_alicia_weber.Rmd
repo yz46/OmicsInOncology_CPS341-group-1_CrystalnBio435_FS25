@@ -35,54 +35,205 @@ dd %>%
 ### Q2
 
 ```{r 2, echo=TRUE, include=TRUE}
+#t-test
+shapiro.test(dd$GRate[dd$diet == 'Natural'])
+shapiro.test(dd$GRate[dd$diet == 'Artificial'])
+
+#equal variances test
+var.test(dd$GRate[dd$diet == 'Natural'], dd$GRate[dd$diet == 'Artificial'])
+
+#both seem normally distributed and variances appear equal
+#could proceed with a student's t-test
+```
+### Q3
+
+```{r 3, echo=TRUE, include=TRUE}
+#could proceed with a student's t-test
+# H0 = no significant difference in growth rates
+t.test(dd$GRate ~ dd$diet, var.equal = TRUE)
+```
+t-statistic = how many standard deviations the sample means are apart
+df = sample sizes and assumption of equal variances
+
+t= -1.3259:                        mean of the Artificial diet group is less than that of the Natural diet
+p = 0.1901:                        H0 not rejected, no significant difference in growth rates
+95% CI: (-0.613962, 0.1283495):   includes 0, supports that no signf. difference
+
+
+### Q4
+
+```{r 4, echo=TRUE, include=TRUE}
+m1 <- lm(GRate ~ diet, data=dd)
+summary(m1)
+```
+
+### Q5
+
+```{r 5, echo=TRUE, include=TRUE}
+anova(m1)
 
 ```
+comparing t-test and anova:
+- they are mathematically equivalent when comparing means of groups
+- p-values (0.1901) are therefore the same
+- df=1: one factor (diet) with two levels
+- df=58: 60 observations minus two parameters
+- F(1, 58) = 1.7579, p = 0.1901: no statistically significant difference in the mean growth rates
+-> diet type did not have a measurable impact
+
+### Q6
+
+```{r 6, echo=TRUE, include=TRUE}
+autoplot(m1)
+
+```
+assumptions of normality, linearity, and equal variance are met, minor deviations in the Q-Q plot and a few potential outliers that likely don't affect model validity
+
 
 ### Q7
 
 ```{r 7, echo=TRUE, include=TRUE}
-summary(dd)
-#nr of whales has 1 NA
-```
+#file.choose()
+dd2 <- read.csv("/Users/lish/Desktop/data_omics/Gigartina.CSV")
 
 
-### Q9
+# number replicates per diatom treatment
+replics <- dd2 %>%
+  count(diatom.treat)
+print(replics)
 
-```{r 9, echo=TRUE, include=TRUE}
-depth1200 <- dd[dd$depth > 1200, ]
-
-grad200 <- dd[dd$gradient > 200, ]
-
-noiselow <- dd[dd$water.noise == 'low', ]
-
-mayhigh <- dd[dd$water.noise == 'high' & dd$month == 'May', ]
-
-octlowmed <- dd[dd$water.noise == 'low' & dd$month == 'October' & dd$gradient > median(dd$gradient), ]
-
-filteredlatlong <- dd[dd$latitude >= 60.0 & dd$latitude <= 61.0 & 
-                    dd$longitude >= -6.0 & dd$longitude <= -4.0, ]
-
-notmedium <- dd[dd$water.noise != 'medium', ]
+# diameters across treatments
+ggplot(dd2, aes(x = diatom.treat, y = diameter, fill = diatom.treat)) +
+  geom_boxplot(alpha = 0.6, outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.6) +
+  labs(
+    x = "Diatom Treatment",
+    y = "Diameter",
+    title = "Comparison of Diameters Across Diatom Treatments"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = "none")
 
 ```
+### Q8, 9, 10
 
+```{r 8, echo=TRUE, include=TRUE}
+m2 <- lm(diameter ~ diatom.treat, data=dd2)
+summary(m2)
+anova(m2)
 
-### Q10
-
-```{r 10, echo=TRUE, include=TRUE}
-octlowmed <- dd[dd$water.noise == 'low' & dd$month == 'October' & dd$gradient > median(dd$gradient, na.rm=T), ]
 ```
+H0 = There is no significant difference in the mean diameter of Metacarpus
+
+- p=1.92e-08:     at least one treatment group significantly different diam.
+- Between groups (treatments): 3df
+- Within groups (residuals): 36df
+
+significant difference in the mean diameter of Metacarpus across the four treatment groups, F(3, 36) = 22.775, p < 0.001.
 
 
 ### Q11
 
 ```{r 11, echo=TRUE, include=TRUE}
-depthnmean <- dd[dd$depth > 1500 & dd$number.whales > mean(dd$number.whales, na.rm=T), ]
-# problem: mean may be recalculated for every row
-#better:
-meannrwhales <- mean(dd$number.whales, na.rm=T)
-depthnmean2 <- dd[dd$depth > 1500 & dd$number.whales > meannrwhales, ]
+autoplot(m2)
+
 ```
+acceptable
+
+
+### Q12, 13, 14
+
+```{r 12, echo=TRUE, include=TRUE}
+tukey <- TukeyHSD(aov(m2))
+print(tukey)
+plot(tukey, las = 1)
+
+```
+- ASGM differs from all treatments (p < 0.01).  
+- Sstat differs from Sexpo (p = 0.0016).  
+- No difference: Sexpo vs Sdecl, Sstat vs Sdecl (p > 0.05).  
+- ASGM and Sstat show the largest differences.
+
+
+### Q15
+
+```{r 15, echo=TRUE, include=TRUE}
+#file.choose()
+dd3 <- read.csv("/Users/lish/Desktop/data_omics/TemoraBR.CSV")
+str(dd3)
+summary(dd3)
+colnames(dd3)
+ncol(dd3) #nr variables
+nrow(dd3) #nr observations
+```
+dependent: beat rate
+explanatory: temp
+
+### Q16
+
+```{r 16, echo=TRUE, include=TRUE}
+dd3$Facclimatisation_temp <- as_factor(dd3$acclimitisation_temp)
+str(dd3)
+
+
+#coplot
+coplot(beat_rate ~ temp | Facclimatisation_temp, 
+       data = dd3, 
+       panel = panel.smooth,
+       xlab = "Temperature (°C)", 
+       ylab = "Beat Rate",
+       col = "blue",
+       pch = 16)
+
+#ggplot
+ggplot(dd3, aes(x = temp, y = beat_rate, color = Facclimatisation_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ Facclimatisation_temp) +
+  labs(title = "Beat Rate vs. Temperature",
+       x = "Temperature (°C)",
+       y = "Beat Rate",
+       color = "Acclimatisation Temp")
+```
+rate of increase in beat rate with temp appears steeper in 5,10 than in 20:
+suggests acclimatisation temp influences intercept and also rate at which beat rate changes with temperature.
+
+
+### Q17, 18, 19
+
+```{r 17, echo=TRUE, include=TRUE}
+#slopes were not parallel, interaction term!
+m4 <- lm(beat_rate ~ temp * Facclimatisation_temp, data = dd3)
+summary(m4)
+anova(m4)
+```
+- effect of temperature on beat_rate varies depending on the acclimatisation temperature
+- acclimatisation temperature modifies the effect of temperature on beat rate
+- explains why lines in facet plot not parallel
+- main effects should not be interpreted in isolation
+
+-> we could run separate models for each acclimatisation temperature
+
+### Q20
+
+```{r 18, echo=TRUE, include=TRUE}
+autoplot(m4)
+```
+- no major violations regression assumptions
+- slight heteroscedasticity at higher fitted values
+- minor non-normality
+- no strong outliers
+
+### Q21
+
+
+- Linear model with interaction term tested effects of temp and Facclimatisation_temp on beat_rate
+- Significant interaction( p < 0.001) -> Effect of temp on beat rate varies by acclimatisation temp 
+- Main effects significant (p < 0.001) but not interpretable alone due to interaction  
+- High model fit (Adjusted R² = 0.9622)  
+- Residual diagnostics: slight heteroscedasticity, no major violations  
+- Beat rate increases with temp, but rate of increase depends on acclimatisation temp  
+- Next step: Separate regressions for each acclimatisation group may be necessary
 
 
 # Session Information
