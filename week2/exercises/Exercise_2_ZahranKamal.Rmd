@@ -1,0 +1,208 @@
+
+---
+title: "Week 2: Starting with R"
+author: "Zahran Kamal (lunarlores)"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# Set CRAN mirror
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+# Install readr from CRAN
+install.packages("readr")
+
+# Load the library
+library(readr)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 2
+* from https://alexd106.github.io/intro2R/exercise_2.html
+
+### Q2: Fancy Calculator
+```{r, echo=TRUE, include=TRUE }
+myNumber <- 12.43
+
+# do some calculations
+# natural log
+log(myNumber)
+#log base 10
+log10(myNumber)
+#log base 2
+log2(myNumber)
+```
+#Q3: Area determination
+```{r, echo=TRUE, include=TRUE}
+d <-20
+area_circle <- pi*(d/2)^2
+area_circle
+```
+#Q4: Cuberoot 
+```{r, echo=TRUE, include=TRUE}
+number_to_cube_root <- 14*0.51
+cuberoot <- (number_to_cube_root)^(1/3)
+cuberoot
+```
+#Q5: Vectors
+```{r, echo=TRUE, include=TRUE}
+#vector: https://intro2r.com/data-structures.html#scal_vecs
+
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66 )
+weight
+```
+#Q6: Vector calculations
+```{r, echo=TRUE, include=TRUE}
+#vector: https://intro2r.com/data-structures.html#scal_vecs
+
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66 )
+weight[2] #62
+#how to work with vectors: https://intro2r.com/vectors.html
+
+mean_weight <- mean(weight, na.rm =TRUE) #na.rm will ignore NA or missing values
+median_weight <- median(weight, na.rm = TRUE)
+#mode does not have a built in function in R rather it gives the type of object
+type_weight <- mode(weight)
+mean_weight
+median_weight
+type_weight
+
+#variance of sample
+
+sample_size <- length(weight)
+sample_size
+
+var(weight) 
+#if population, var(weight)*sample_size-1/sample_size
+
+```
+#Q7: height vector
+```{r, echo=TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+summary(height) #min,max,quartile, median,mean
+
+#positional indexes
+child2_height <- height[2]
+child2_height
+
+child3_height <- height[3]
+child3_height
+
+child9_height <- height[9]
+child9_height
+
+child10_height <- height[10]
+child10_height
+
+some_child <- height[c(2,3,9,10)]
+some_child
+
+#logical indexes
+
+shorter_child <- height[height<=99]
+shorter_child
+```
+#Q8: BMI by vectorization
+```{r, echo=TRUE, include=TRUE}
+#first, unit adjustment
+height_m <- height/100
+BMI <- weight/height_m^2
+BMI
+```
+#Q9: Sequences
+
+```{r, echo=TRUE, include=TRUE}
+seq1 <- seq(from =0, to = 1, by = 0.1)
+seq1
+```
+#Q10: Sequences reversed
+
+```{r, echo=TRUE, include=TRUE}
+seq2 <- rev(seq(from =1, to = 10, by = 0.5))
+seq2
+```
+#Q11: Sequences pro
+
+```{r, echo=TRUE, include=TRUE}
+seq3 <-rep(1:3, times=3) 
+seq3
+
+lowercase_alphabet <- c(letters)
+
+seq4 <-rep(lowercase_alphabet[c(1,3,5,7)], each=3)
+seq4
+
+seq5 <- rep(lowercase_alphabet[c(1,3,5,7)], times=3)
+seq5
+
+seq6 <- rep(rep(1:3, each=3), times=2)
+seq6
+
+seq7 <- rep(1:5, times=rev(1:5))
+seq7
+
+seq8 <- rep(c(7,2,8,1), times=c(4,3,1,5))
+seq8
+```
+#Q12: sort height 
+
+```{r, echo=TRUE, include=TRUE}
+height_sorted <- sort(height,decreasing = TRUE)
+height_sorted
+```
+#Q13: childnames
+
+```{r, echo=TRUE, include=TRUE}
+
+child_name <- c("Alfred", "Barbara", "James", "Jane", "John", "Judy", "Louise", "Mary", "Ronald", "William")
+
+child_name
+```
+#Q14: child sorting height
+
+```{r, echo=TRUE, include=TRUE}
+height_ord <- order(height)
+height
+height_sorted
+height_ord
+
+names_sort <- child_name[height_ord]
+names_sort
+
+```
+#Q14: child sorting weight
+
+```{r, echo=TRUE, include=TRUE}
+weight_ord <- order(rev(weight))
+weight
+weight_ord
+
+names_sort_weight <- child_name[weight_ord]
+names_sort_weight
+
+```
+#Q16: missingdata
+```{r, echo=TRUE, include=TRUE}
+mydata = c(2, 4, 1, 6, 8, 5, NA, 4, 7)
+
+mean(mydata)
+mean(mydata, na.rm = TRUE)
+```
+#Q17: all variables
+```{r, echo=TRUE, include=TRUE}
+
+rm(seq1)
+ls()
+```
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+

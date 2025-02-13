@@ -1,0 +1,111 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 4
+* from https://alexd106.github.io/intro2R/exercise_4.html 
+#task 2 is downloading data file 
+#task 3 is only reading
+
+#task 4
+```{r, echo=TRUE, include=TRUE}
+squid <- read.table ('../data4exercises/squid1.txt', header=TRUE)
+str(squid)
+summary (squid)
+# 519 observations and 13 variables 
+```
+```{r, echo=TRUE, include=TRUE}
+squid$year <- as.factor(squid$year)
+squid$year 
+```
+```{r , echo=TRUE, include=TRUE}
+squid$month <- as.factor(squid$month)
+squid$month
+```
+```{r , echo=TRUE, include=TRUE}
+squid$maturity.stage <- factor(squid$maturity.stage)
+squid$maturity.stage
+```
+```{r , echo=TRUE, include=TRUE}
+str(squid)
+```
+```{r , echo=TRUE, include=TRUE}
+monthyear <- xtabs(~squid$year + squid$month, data = squid)
+monthyear
+```
+```{r , echo=TRUE, include=TRUE}
+any (table (squid$year, squid$month) == 0)
+#TRUE, there are some missing (year, month) combinations.
+```
+```{r , echo=TRUE, include=TRUE}
+obs_table <- xtabs(~ squid$year + squid$maturity.stage + squid$month, data = squid)
+ftable(obs_table)
+```
+#task 9
+```{r , echo=TRUE, include=TRUE}
+scatter <- plot(squid$DML, squid$weight, 
+     xlab = "Dorsal Mantle Length (DML)", 
+     ylab = "Weight", 
+     main = "Scatterplot of DML vs. Weight",
+     pch = 19, col = "blue")
+#the curve is exponential therefore transformation is useful
+```
+```{r , echo=TRUE, include=TRUE}
+squid$log_weight <- log(squid$weight)    
+squid$sqrt_weight <- sqrt(squid$weight) 
+```
+```{r , echo=TRUE, include=TRUE}
+plot(squid$DML, squid$log_weight, 
+     xlab = "Dorsal Mantle Length (DML)", 
+     ylab = "Log(Weight)", 
+     main = "Scatterplot of DML vs. Log(Weight)",
+     pch = 19, col = "red")
+```
+```{r , echo=TRUE, include=TRUE}
+plot(squid$DML, squid$sqrt_weight, 
+     xlab = "Dorsal Mantle Length (DML)", 
+     ylab = "Sqrt(Weight)", 
+     main = "Scatterplot of DML vs. Sqrt(Weight)",
+     pch = 19, col = "green")
+#the sqrt plot best straightens the data
+```
+```{r , echo=TRUE, include=TRUE}
+png("DML_vs_Weight.png", width = 800, height = 600)
+plot(squid$DML, squid$weight, main = "DML vs. Weight")
+dev.off()
+```
+```{r , echo=TRUE, include=TRUE}
+boxplot(squid$DML ~ squid$maturity.stage, 
+        xlab = "Maturity Stage", 
+        ylab = "Dorsal Mantle Length (DML)", 
+        main = "Boxplot of DML by Maturity Stage",
+        col = c("lightblue", "lightgreen", "lightpink"),
+        border = "black",
+        notch = TRUE)
+
+```
+```{r , echo=TRUE, include=TRUE}
+pairs(squid[, c("DML", "weight", "eviscerate.weight", "ovary.weight", "nid.length", "nid.weight")])
+```
+```{r , echo=TRUE, include=TRUE}
+pairs.panels (squid[, c("DML", "weight", "eviscerate.weight", "ovary.weight", "nid.length", "nid.weight")],
+             method = "pearson",   
+             hist.col = "lightblue", 
+             density = TRUE,        
+             ellipses = TRUE,       
+             smooth = TRUE)
+```
