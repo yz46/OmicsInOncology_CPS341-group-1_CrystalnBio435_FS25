@@ -22,41 +22,41 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 #task 3 is only reading
 
 #task 4
-```{r myN, echo=TRUE, include=TRUE}
+```{r, echo=TRUE, include=TRUE}
 squid <- read.table ('../data4exercises/squid1.txt', header=TRUE)
 str(squid)
 summary (squid)
 # 519 observations and 13 variables 
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r, echo=TRUE, include=TRUE}
 squid$year <- as.factor(squid$year)
 squid$year 
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 squid$month <- as.factor(squid$month)
 squid$month
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 squid$maturity.stage <- factor(squid$maturity.stage)
 squid$maturity.stage
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 str(squid)
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 monthyear <- xtabs(~squid$year + squid$month, data = squid)
 monthyear
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 any (table (squid$year, squid$month) == 0)
 #TRUE, there are some missing (year, month) combinations.
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 obs_table <- xtabs(~ squid$year + squid$maturity.stage + squid$month, data = squid)
 ftable(obs_table)
 ```
 #task 9
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 scatter <- plot(squid$DML, squid$weight, 
      xlab = "Dorsal Mantle Length (DML)", 
      ylab = "Weight", 
@@ -64,18 +64,18 @@ scatter <- plot(squid$DML, squid$weight,
      pch = 19, col = "blue")
 #the curve is exponential therefore transformation is useful
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 squid$log_weight <- log(squid$weight)    
 squid$sqrt_weight <- sqrt(squid$weight) 
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 plot(squid$DML, squid$log_weight, 
      xlab = "Dorsal Mantle Length (DML)", 
      ylab = "Log(Weight)", 
      main = "Scatterplot of DML vs. Log(Weight)",
      pch = 19, col = "red")
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 plot(squid$DML, squid$sqrt_weight, 
      xlab = "Dorsal Mantle Length (DML)", 
      ylab = "Sqrt(Weight)", 
@@ -83,12 +83,12 @@ plot(squid$DML, squid$sqrt_weight,
      pch = 19, col = "green")
 #the sqrt plot best straightens the data
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 png("DML_vs_Weight.png", width = 800, height = 600)
 plot(squid$DML, squid$weight, main = "DML vs. Weight")
 dev.off()
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 boxplot(squid$DML ~ squid$maturity.stage, 
         xlab = "Maturity Stage", 
         ylab = "Dorsal Mantle Length (DML)", 
@@ -98,10 +98,10 @@ boxplot(squid$DML ~ squid$maturity.stage,
         notch = TRUE)
 
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 pairs(squid[, c("DML", "weight", "eviscerate.weight", "ovary.weight", "nid.length", "nid.weight")])
 ```
-```{r myN, echo=TRUE, include=TRUE}
+```{r , echo=TRUE, include=TRUE}
 pairs.panels (squid[, c("DML", "weight", "eviscerate.weight", "ovary.weight", "nid.length", "nid.weight")],
              method = "pearson",   
              hist.col = "lightblue", 
