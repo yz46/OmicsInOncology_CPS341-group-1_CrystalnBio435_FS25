@@ -23,17 +23,32 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 ## Exercise 3
 ### Part 5
-```{r myN, echo=FALSE, include=TRUE}
-whaledata <- read.table(file = 'data/whaledata.txt', header = TRUE, sep = '\t', stringsAsFactors = TRUE)
+```{r, echo=TRUE, include=TRUE}
+mywhaledata <- read.table("/Users/mathildehatlem/OmicsInOncology_CPS341nBio435_FS25/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+```
+### Part 7
+```{r, echo=TRUE, include=TRUE}
+summary(mywhaledata)
+```
+### Part 9
+```{r, echo=TRUE, include=TRUE}
+deep_deep <- mywhaledata[mywhaledata$depth > 1200, ]
+deep_deep
+
+steep_steep <- mywhaledata[mywhaledata$gradient > 200, ]
+steep_steep
+
+low_noise <- mywhaledata[mywhaledata$water.noise == 'low', ]
+low_noise
+
+high_may <- mywhaledata[mywhaledata$water.noise == 'high' & mywhaledata$month == 'may', ]
+high_may
+
 ```
 
-```{r , echo=TRUE, include=TRUE}
 
-```
 
-# Session Information
 
+## session
 ```{r sessionInfo, echo=FALSE, include=TRUE}
 pander::pander(sessionInfo())
-```
-
