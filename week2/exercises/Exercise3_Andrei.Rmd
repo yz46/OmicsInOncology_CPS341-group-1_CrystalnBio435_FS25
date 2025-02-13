@@ -1,0 +1,16 @@
+---
+title: "Exercise3_Andrei"
+output: html_document
+---
+```{r}
+install.packages("readxl")  
+file.exists("whaledata")
+getwd()
+```
+
+```{r}
+#Ex5
+whale <- read_excel("whaledata")
+
+```
+
