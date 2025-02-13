@@ -16,21 +16,6 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 # Exercises for the R-Beginner - The fancy calculator
 
-## Exercise 2
-* from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=FALSE, include=TRUE}
-myNumber <- 12.43
-
-# do some calculations
-# natural log
-log(myNumber)
-```
-
-```{r lg10, echo=TRUE, include=TRUE}
-# log10
-log10(myNumber)
-```
-
 # Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
@@ -38,3 +23,18 @@ pander::pander(sessionInfo())
 ```
 
 
+### Switching gears
+```{r}
+whaledata <- read.table(file="C:/Users/Admin/Documents/OmicsInOncology_Group3_new/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep="\t", stringsAsFactors = TRUE)
+library(tidyverse)
+```
+
+
+
+```{r}
+whaledata %>% ggplot(aes(x=month, y=number.whales, fill=month)) + geom_bar(stat="identity") +
+scale_fill_manual(values=c("pink", "orange")) +
+ylim(0,720) +
+xlab("Month") + ylab("Number of whales") +
+ggtitle("Number of whales per month")
+```
