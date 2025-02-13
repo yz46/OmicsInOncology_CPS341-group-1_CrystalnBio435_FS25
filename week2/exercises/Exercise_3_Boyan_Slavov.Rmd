@@ -16,36 +16,23 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 
 # Exercises for the R-Beginner - The fancy calculator
 
-## Exercise 2
-* from https://alexd106.github.io/intro2R/exercise_2.html
-```{r myN, echo=FALSE, include=TRUE}
-myNumber <- 12.43
-
-# do some calculations
-# natural log
-log(myNumber)
-```
-
-```{r lg10, echo=TRUE, include=TRUE}
-# log10
-log10(myNumber)
-```
+## Exercise 3
 
 # Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
 pander::pander(sessionInfo())
 ```
-
+### 3.5
 ```{r whaledata, echo=TRUE, include=TRUE}
 whaledata <- read.table(file="C:/Users/Admin/Documents/OmicsInOncology_Group3_new/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep="\t", stringsAsFactors = TRUE)
 print(whaledata)
 ```
-
+### 3.7
 ```{r summary whale, echo=TRUE, include=TRUE}
 summary(whaledata)
 ```
-
+### 3.9
 ```{r whale depth, echo=TRUE, include=TRUE}
 whales.deep <- whaledata[whaledata$depth > 1200, ]
 print(whales.deep)
@@ -80,12 +67,12 @@ print(whales.location)
 whales.notMedium <- whaledata[whaledata$water.noise != "medium", ]
 print(whales.notMedium)
 ```
-
+### 3.10
 ```{r whale 10, echo=TRUE, include=TRUE}
 whales.10 <- whaledata[whaledata$water.noise == "low" & whaledata$gradient > median(whaledata$gradient), ]
 print(whales.10)
 ```
-
+### 3.11
 ``` {r 11, echo=TRUE, include=TRUE}
 whales.11 <- whaledata[whaledata$depth > 1500 & whaledata$number.whales > mean(whaledata$number.whales), ] 
 print(whales.11)
