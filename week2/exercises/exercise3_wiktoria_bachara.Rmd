@@ -1,0 +1,57 @@
+---
+title: "exercise3_wiktoria_bachara"
+output: html_document
+---
+
+#Q4,Q5,Q6
+```{r, echo=TRUE, include=TRUE}
+whale <-read.table('/Users/bobrzanek/desktop/Group_2/week2/data4exercises/mywhaledata.tsv', header = TRUE, sep="\t", stringsAsFactors = TRUE)
+head(whale)         # display the first 5 rows 
+names(whale)        # display the variable names
+str(whale)          # display the structure of the dataframe whale
+```
+#Q7
+```{r, echo=TRUE, include=TRUE}
+summary(whale)
+print(summary)
+```
+#Q9
+
+```{r, echo=TRUE, include=TRUE}
+#depths greater than 1200 m
+whale.1200<-whale [whale$depths>1200]
+#gradient steeper than 200 degrees
+whale.200 <- whale[whale$gradient > 200, ]
+#water noise level of ‘low’
+whale.low <- whale[whale$water.noise == "low", ]
+#water.noise level of ‘high’ in the month of ‘May’
+whale.h.may <-whale [whale$water.noise =="high" & whale$month=="May", ]
+#month of ‘October’, water noise level of ‘low’ and gradient greater than the median value of gradient (132)
+whale.l.october <-whale [whale$water.noise=="low" & whale$month=="October" & whale$gradient>132, ]
+#all observations from between latitudes 60.0 and 61.0 and longitudes -6.0 and -4.0
+whale.lat.long <- whale [whale$latitudes > 60.0 & whale$latitudes < 61.0 & whale$longitudes > -6.0 & whale$longitudes < -4.0, ] 
+#all rows that do not have a water noise level of medium
+whale.medium <- whale[whale$water.noise != "medium", ]
+print(whale.1200)
+print(whale.200)
+print(whale.low)
+print(whale.h.may)
+print(whale.l.october)
+print(whale.lat.long)
+print(whale.medium)
+```
+
+#Q10
+```{r, echo=TRUE, include=TRUE}
+#month of ‘October’, water noise level of ‘low’ and gradient greater than the median()
+whale.l.october.m <-whale [whale$water.noise=="low" & whale$month=="October" & whale$gradient>median(whale$gradient), ]
+print(whale.l.october.m)
+```
+
+#Q11
+
+```{r, echo=TRUE, include=TRUE}
+#depths greater than 1500 m and with a greater number of whales spotted than average
+whale.1500<- whale[whale$depth > 1500 & whale$number.whales > mean(whale$number.whales, na.rm = TRUE),]
+print(whale.1500)
+```
