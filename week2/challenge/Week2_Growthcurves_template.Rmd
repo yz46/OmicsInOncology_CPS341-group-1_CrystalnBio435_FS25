@@ -22,13 +22,12 @@ It describes the OD600 (growth) of the *Staphylococcus aureus* strain **JE2** in
 
 # Reading in Data and Plotting Growth Curves
 
-```{r load data, eval=TRUE, include=FALSE, echo=FALSE}
+```{r load data, eval=TRUE, include=TRUE, echo=TRUE}
 fN <- "JE_growth_final.txt" # us this txt file that is copy pasted spread sheet from excel tab separated 
 ```
 
-```{r print data, eval=TRUE, include=TRUE, echo=FALSE}
-print("these are so called junks of code, you may include them to be shown in the rendered document (html here)
-      each junk has a unique name next to it and then some additional arguments")
+```{r print data, eval=TRUE, include=FALSE, echo=TRUE}
+print("these are so called junks of code, you may include them to be shown in the rendered document (html here) each junk has a unique name next to it and then some additional arguments")
 print(fN)
 ```
 
