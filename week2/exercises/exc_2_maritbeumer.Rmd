@@ -31,8 +31,6 @@ log(myNumber)
 log10(myNumber)
 ```
 
-# Session Information
-
 ```{r log2, echo=FALSE, include=TRUE}
 # log2
 log2(myNumber)

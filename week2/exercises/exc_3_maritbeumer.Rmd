@@ -1,0 +1,90 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 3
+* from https://alexd106.github.io/intro2R/exercise_2.html
+
+# Session Information
+
+
+```{r dataset, echo=FALSE, include=TRUE}
+data <- read.table("../data4exercises/whaledata_marit.csv", header = TRUE, sep = ";")
+
+```
+
+```{r part 7 , echo=FALSE, include=TRUE}
+# Assuming your dataframe is named 'data'
+summary(data)
+
+# Count missing values for each variable
+missing_values <- sapply(data, function(x) sum(is.na(x)))
+missing_values
+
+```
+
+```{r part 9, echo=FALSE, include=TRUE}
+# Assuming your dataframe is named 'data'
+
+# At depths greater than 1200 m
+depths_greater_1200 <- data[data$depth > 1200, ]
+
+# Gradient steeper than 200 degrees
+gradient_steeper_200 <- data[data$gradient > 200, ]
+
+# Water noise level of 'low'
+water_noise_low <- data[data$water.noise == 'low', ]
+
+# Water noise level of 'high' in the month of 'May'
+water_noise_high_may <- data[data$water.noise == 'high' & data$month == 'May', ]
+
+# Month of 'October', water noise level of 'low' and gradient greater than the median value of gradient (132)
+gradient_median <- 132
+october_low_noise_high_gradient <- data[data$month == 'October' & data$water.noise == 'low' & data$gradient > gradient_median, ]
+
+# All observations from between latitudes 60.0 and 61.0 and longitudes -6.0 and -4.0
+lat_lon_range <- data[data$latitude >= 60.0 & data$latitude <= 61.0 & data$longitude >= -6.0 & data$longitude <= -4.0, ]
+
+# All rows that do not have a water noise level of 'medium'
+no_medium_noise <- data[data$water.noise != 'medium', ]
+
+water_noise_low
+```
+
+```{r part 10 , echo=FALSE, include=TRUE}
+# Calculate the median value of the gradient column
+gradient_median <- median(data$gradient, na.rm = TRUE)
+
+# Extract rows where the month is 'October', water noise level is 'low', and gradient is greater than the median value
+october_low_noise_high_gradient <- data[data$month == 'October' & data$water.noise == 'low' & data$gradient > gradient_median, ]
+
+october_low_noise_high_gradient
+```
+
+
+```{r part 11}
+whale <- data
+# Ensure the columns are numeric
+whale$depth <- as.numeric(whale$depth)
+# Calculate the mean number of whales spotted, ignoring missing values
+mean_whales_spotted <- mean(whale$whales_spotted, na.rm = TRUE)
+
+# Extract rows with depths greater than 1500 m and whales spotted greater than the average
+filtered_whale_data <- whale[whale$depth > 1500 & whale$whales_spotted > mean_whales_spotted, ]
+```
+
+

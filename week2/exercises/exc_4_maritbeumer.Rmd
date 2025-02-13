@@ -1,0 +1,77 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 4
+* from https://alexd106.github.io/intro2R/exercise_2.html
+```{r myN, echo=FALSE, include=TRUE}
+data <- read.table("../data4exercises/squid1.txt", header = TRUE, sep = ";")
+```
+
+```{r}
+# Display the structure of the dataset
+squid<- data
+
+# Summarize the dataset
+summary(squid)
+
+# Check the number of observations and variables
+num_observations <- nrow(squid)
+num_variables <- ncol(squid)
+
+# Print the results
+cat("Number of observations:", num_observations, "\n")
+cat("Number of variables:", num_variables, "\n")
+
+# Recode the 'year', 'month', and 'maturity.stage' variables as factors
+squidyear_factor <- as.factor(squid$year)
+squidmonth_factor <- as.factor(squid$month)
+squidmaturity_stage_factor <- as.factor(squid$maturity.stage)
+```
+```{r}
+# Count the number of observations per month and year combination
+obs_per_month_year <- table(squidyear_factor, squidmonth_factor)
+print(obs_per_month_year)
+
+# Check if data is available for each month in each year
+missing_data <- any(obs_per_month_year == 0)
+if (missing_data) {
+  cat("Some month-year combinations have no data.\n")
+} else {
+  cat("Data is available for each month in each year.\n")
+}
+
+# Identify the years with the most observations
+obs_per_year <- table(squid$year_factor)
+print(obs_per_year)
+
+# Find the year with the maximum observations
+most_obs_year <- names(obs_per_year[obs_per_year == max(obs_per_year)])
+cat("Year(s) with the most observations:", most_obs_year, "\n")
+
+# Create a contingency table for year, maturity stage, and month
+contingency_table <- xtabs(~ squidyear_factor + squidmaturity_stage_factor + squidmonth_factor, data = squid)
+
+# Display a flattened version of the contingency table
+ftable(contingency_table)
+```
+
+
+# Session Information
+
+
+
