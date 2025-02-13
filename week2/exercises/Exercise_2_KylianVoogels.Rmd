@@ -20,10 +20,6 @@ library(readr) # make sure your R has this library loaded, if not install it (se
 * from https://alexd106.github.io/intro2R/exercise_2.html
 ```{r myN, echo=FALSE, include=TRUE}
 myNumber <- 12.43
-
-# do some calculations
-# natural log
-log(myNumber)
 ```
 ```{r lg10, echo=TRUE, include=TRUE}
 # log10
@@ -70,8 +66,10 @@ bmi <- weight/((Height/100)^2)
 print (bmi)
 ```
 ```{r echo=TRUE, include=TRUE}
+#seq exercise 2.9
 myseq1 <- seq(from=0, to=1, by=0.1)
-print(seq1)
+print(myseq1)
+#seq exercise 2.10
 myseq2 <- seq(from=10, to=1, by=-0.5)
 print(myseq2)
 #the same exercise in another way
