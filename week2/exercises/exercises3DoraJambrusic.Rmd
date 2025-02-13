@@ -1,0 +1,104 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 3
+* from https://alexd106.github.io/intro2R/exercise_3.html
+
+### Exercise 3.4 / 3.5
+```{r read table, echo=TRUE, include=TRUE}
+# read table
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+str(whale)
+```
+### Exercise 3.7 
+```{r summary, echo=TRUE, include=TRUE}
+# summary
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+summary(whale)
+```
+### Exercise 3.9 
+```{r greater depths, echo=TRUE, include=TRUE}
+# greater depths
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+greater_depth <- whale[whale$depth > 1200, ]
+greater_depth
+```
+
+```{r steeper gradient, echo=TRUE, include=TRUE}
+# steeper gradient
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+steeper_gradient <- whale[whale$gradient > 200, ]
+steeper_gradient
+```
+
+```{r low water noise, echo=TRUE, include=TRUE}
+# low water noise
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+water_noise_low <- whale[whale$water.noise == "low", ]
+water_noise_low
+```
+
+```{r high water noise May, echo=TRUE, include=TRUE}
+# high water noise May
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+water_noise_high_May <- whale[whale$water.noise == "high" & whale$month == "May", ]
+water_noise_high_May
+```
+
+```{r low water noise, October, greater gradient than the median gradient, echo=TRUE, include=TRUE}
+# low water noise, October, greater gradient than the median gradient (132)
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+lowwn_oct_ggrad_than_mediangrad <- whale[whale$water.noise == "low" & whale$month == "October" & whale$gradient > 132, ]
+lowwn_oct_ggrad_than_mediangrad
+```
+
+```{r latitudes longitudes, echo=TRUE, include=TRUE}
+# latitudes longitudes
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+latitudes_longitudes <- whale[whale$latitude >= 60.0 & whale$latitude <= 61.0 & whale$longitude >= -6.0 & whale$longitude <= -4.0, ]
+latitudes_longitudes
+```
+
+```{r no medium water noise, echo=TRUE, include=TRUE}
+# no medium water noise
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+no_medium_noise <- whale[whale$water.noise != 'medium', ]
+no_medium_noise
+```
+### Exercise 3.10
+```{r using the mean function, echo=TRUE, include=TRUE}
+# using the mean function
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+lowwn_oct_ggrad_than_mediangrad2 <- whale[whale$water.noise == "low" & whale$month == "October" & whale$gradient > median(whale$gradient), ]
+lowwn_oct_ggrad_than_mediangrad2
+```
+### Exercise 3.11
+```{r greater depths and greater number of whales, echo=TRUE, include=TRUE}
+# greater depths and greater number of whales
+whale <- read.table(file = '/Users/doraj/Desktop/OmicsInOncology_CPS341nBio435_FS25/whaledata.txt', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+# It did not work the first time because there was data missing from number of whales. The solution is to exclude that data when calculating the mean.
+greatdepths_greatnumber <- whale[whale$depth > 1500 & whale$number.whales > mean(whale$number.whales, na.rm = TRUE), ]
+greatdepths_greatnumber
+```
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
