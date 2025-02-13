@@ -44,6 +44,7 @@ low_noise
 high_may <- mywhaledata[mywhaledata$water.noise == 'high' & mywhaledata$month == 'may', ]
 high_may
 
+gradient_median <- median(mywhaledata$gradient, na.rm = TRUE)
 ```
 
 
