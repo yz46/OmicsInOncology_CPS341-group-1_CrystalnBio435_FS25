@@ -411,6 +411,46 @@ print(first_five)</code></pre>
 </div>
 <div id="part-7" class="section level3" number="1.1.6">
 <h3><span class="header-section-number">1.1.6</span> Part 7</h3>
+<pre class="r"><code># calculation with height
+height &lt;- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+print(summary(height))</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    77.0    85.5   100.5   100.4   112.0   133.0</code></pre>
+<pre class="r"><code>some_children &lt;- height[c(2,3,9,10)]
+print(some_children)</code></pre>
+<pre><code>## [1] 102  83 133 112</code></pre>
+<pre class="r"><code>print(summary(some_children))</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   83.00   97.25  107.00  107.50  117.25  133.00</code></pre>
+<pre class="r"><code>shorter_children &lt;- height[height &lt;= 99]
+print(shorter_children)</code></pre>
+<pre><code>## [1] 83 84 99 90 77</code></pre>
+</div>
+<div id="part-8" class="section level3" number="1.1.7">
+<h3><span class="header-section-number">1.1.7</span> Part 8</h3>
+<pre class="r"><code># vectorisation
+weight &lt;- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+height &lt;- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+bmi &lt;- weight / ((height/100)^2)
+print(bmi)</code></pre>
+<pre><code>##  [1] 55.00638 59.59246 82.74060 83.61678 60.19794 79.01235 94.45100 52.61480
+##  [9] 37.87665 52.61480</code></pre>
+</div>
+<div id="part-9" class="section level3" number="1.1.8">
+<h3><span class="header-section-number">1.1.8</span> Part 9</h3>
+<pre class="r"><code># making a sequence
+seq1 &lt;- seq(from=0, to=1, by=0.1)
+print(seq1)</code></pre>
+<pre><code>##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+</div>
+<div id="part-10" class="section level3" number="1.1.9">
+<h3><span class="header-section-number">1.1.9</span> Part 10</h3>
+<pre class="r"><code># making a sequence 2
+seq2 &lt;- seq(from=1, to=10, by=0.5)
+seq2_cor &lt;- rev(seq2)
+print(seq2_cor)</code></pre>
+<pre><code>##  [1] 10.0  9.5  9.0  8.5  8.0  7.5  7.0  6.5  6.0  5.5  5.0  4.5  4.0  3.5  3.0
+## [16]  2.5  2.0  1.5  1.0</code></pre>
 </div>
 </div>
 </div>
