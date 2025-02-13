@@ -1,0 +1,30 @@
+---
+title: "Week 2: Starting with R"
+author: "Zahran Kamal"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# Set CRAN mirror
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+# Install readr from CRAN
+install.packages("readr")
+
+# Load the library
+library(readr)
+```
+
+#Q1
+R script or R markdown?
+
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
