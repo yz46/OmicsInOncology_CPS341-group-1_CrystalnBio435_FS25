@@ -24,7 +24,6 @@ It describes the OD600 (growth) of the *Staphylococcus aureus* strain **JE2** in
 
 ```{r load data, eval=TRUE, include=FALSE, echo=FALSE}
 fN <- "JE_growth_final.txt" # us this txt file that is copy pasted spread sheet from excel tab separated 
-print(fN)
 ```
 
 ```{r print data, eval=TRUE, include=TRUE, echo=FALSE}
