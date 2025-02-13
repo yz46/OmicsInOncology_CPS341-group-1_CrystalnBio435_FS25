@@ -1,0 +1,130 @@
+---
+title: "Exercise 6"
+author: "Alicia Weber, used work of BIO 144 to solve"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+library(readr)
+```
+
+# Q1
+```{r myN, echo=TRUE, include=TRUE}
+area <- function(diam) {
+  rad <- diam/2
+  return(pi*rad^2)
+}
+
+testnr <- 3.4
+areanr <- area(testnr)
+print(areanr)
+
+diams <- c(6.3, 4.2, 3.4, 2.1, 8.3)
+areas <- area(diams)
+print(areas)
+
+```
+
+# Q2
+
+```{r 6, echo=TRUE, include=TRUE}
+ftoc <- function(fahr) {
+  centi <- (fahr - 32) * 5 / 9
+  cat("Fahrenheit:", fahr, "°F is equivalent to", round(centi, 2), "°C centigrade.\n")
+  return(centi)
+}
+
+temp <- 98.6
+ftoc(temp)
+
+```
+
+# Q3
+
+```{r 7, echo=TRUE, include=TRUE}
+#seed for reproducibility
+set.seed(123)
+dd <- rnorm(100, mean = 35, sd = 15)
+
+mmrh <- function(dd) {
+  mean <- mean(dd)
+  median <- median(dd)
+  range <- range(dd)
+  
+  cat("Mean:", mean, "\n")
+  cat("Median:", median, "\n")
+  cat("Range:", diff(range), "\n")
+  hist(dd, prob = TRUE, breaks = 20, col = 'lightblue',
+       main = "Histogram with Density Curve", xlab = "Value", ylab = "Proportion")
+  
+  lines(density(dd), col = "black", lwd = 2)
+}
+
+mmrh(dd)
+
+```
+
+
+# Q4
+
+```{r 9, echo=TRUE, include=TRUE}
+median <- function(dd) {
+  ddsort <- sort(dd)
+  n <- length(ddsort)
+  
+  if (n %% 2 == 1) {
+    return(ddsort[(n + 1) / 2])
+  } else {
+    return(mean(ddsort[c(n / 2, n / 2 + 1)]))
+  }
+}
+
+odd <- c(1, 3, 5, 7, 9)
+even <- c(2, 4, 6, 8, 10)
+
+median(odd)
+median(even)
+
+
+```
+
+
+# Q5 With ChatGPT help
+
+```{r 10, echo=TRUE, include=TRUE}
+ricker <- function(nzero, r, time, K = 100) {
+  pop <- numeric(time)
+  pop[1] <- nzero
+  
+  for (t in 2:time) {
+    pop[t] <- pop[t-1] * exp(r * (1 - pop[t-1] / K))
+  }
+  return(pop)
+}
+
+#Initial pop size
+nzero <- 10
+#Growth rate
+r <- 0.1
+#Nr time steps
+time <- 50
+#default 100
+K <- 100
+
+popsize <- ricker(nzero, r, time, K)
+print(popsize)
+
+```
+
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
