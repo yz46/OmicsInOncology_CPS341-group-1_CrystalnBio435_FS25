@@ -48,9 +48,19 @@ Like here: `r dd`
 # Session Information
 
 ```{r sessionInfo, echo=FALSE, include=TRUE}
-pander::pander(sessionInfo())
+
 ```
 
+```{r}
+library(ggplot2)
+
+# Create scatter plot with trend line, color-coded by Growth Medium
+dat %>% ggplot(aes(x = Time, y = OD600_blank_corrected, color = Experiment)) +
+  facet_wrap(~ Growth_Medium) +
+  geom_point(alpha = 0.6) +  # Scatter points with some transparency
+  labs(title = "Bacterial Growth Curve", x = "Time (hours)", y = "OD600 (Corrected)") +
+  theme_minimal()
+```
 
 # References {-}
 
