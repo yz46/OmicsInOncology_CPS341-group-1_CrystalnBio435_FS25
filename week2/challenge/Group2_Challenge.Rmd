@@ -1,0 +1,62 @@
+---
+title: "Challenge Week 2, Group 2"
+author: "Group 2"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+library(tidyverse)
+```
+
+
+```{r load data, eval=TRUE, include=FALSE}
+#file.choose()
+dd <- read.delim("/Users/lish/Desktop/data_omics/JE_growth_final.txt")
+```
+
+
+Visualisation
+```{r print data, eval=TRUE, include=TRUE, echo=TRUE}
+#aggregating data (less chaos in plot)
+agr <- aggregate(OD600_blank_corrected ~ Time + Growth_Medium, data = dd, FUN = mean, na.rm = T)
+
+#plotting
+ggplot(agr, aes(x=Time, y= OD600_blank_corrected, color = Growth_Medium)) +
+    geom_line() +
+    geom_point() +
+    labs(title = "Growth Curve for Different Media",
+       x = "Time (hours)",
+       y = "Mean OD660 (Growth)",
+       color = "Growth Medium")
+
+#without aggregating
+ggplot(dd, aes(x=Time, y= OD600_blank_corrected, color = Growth_Medium)) +
+    geom_line() +
+    geom_point() +
+    labs(title = "Growth Curve for Different Media",
+       x = "Time (hours)",
+       y = "Mean OD660 (Growth)",
+       color = "Growth Medium")
+```
+```{r 2, eval=TRUE, include=TRUE, echo=TRUE}
+m1 <- lm(OD600_blank_corrected ~ Growth_Medium, data = dd)
+
+summary(m1)
+anova(m1)
+
+
+
+
+```
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+
+
