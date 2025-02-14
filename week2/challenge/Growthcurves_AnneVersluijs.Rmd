@@ -39,25 +39,15 @@ print(fN)
 ```
 
 ```{r dimensions, eval=TRUE, include=TRUE, echo=FALSE}
-# 
+
 # Making a nice plot
 
 
 library(ggplot2)
 library(dplyr)
 
-# Summarize Data: Mean and Standard Deviation for Each Condition
-summary_data <- dat %>%
-    group_by(Growth_Medium, Time) %>%
-    summarise(
-        Mean_OD = mean(OD600_blank_corrected, na.rm = TRUE),
-        SD_OD = sd(OD600_blank_corrected, na.rm = TRUE),
-        N = n()
-    )
 
-print(summary_data)
-
-# Plot OD600 Growth Curves
+# Plotting the OD600 Growth Curves
 ggplot(dat, aes(x = Time, y = OD600_blank_corrected, color = Growth_Medium, group = interaction(Growth_Medium, Replicate))) +
     geom_line(alpha = 0.6) +
     geom_point(alpha = 0.8) +
@@ -68,11 +58,11 @@ ggplot(dat, aes(x = Time, y = OD600_blank_corrected, color = Growth_Medium, grou
          color = "Growth Medium") +
     theme_minimal()
 
-# Hypothesis Testing: ANOVA to Compare Growth in Different Media
+# Anova test 
 anova_result <- aov(OD600_blank_corrected ~ Growth_Medium, data = dat)
 summary(anova_result)
 
-# If there are only two conditions, use a t-test
+# T-test after Anova
 if (length(unique(dat$Growth_Medium)) == 2) {
     t_test_result <- t.test(OD600_blank_corrected ~ Growth_Medium, data = dat)
     print(t_test_result)
@@ -82,31 +72,13 @@ if (length(unique(dat$Growth_Medium)) == 2) {
     print(tukey_result)
 }
 
-# Now its shows all the data points, but we need a regression line
-# Load necessary libraries
-library(ggplot2)
-library(dplyr)
 
-# Ensure Growth_Medium is a factor
+
 dat$Growth_Medium <- as.factor(dat$Growth_Medium)
 
-# Check structure of the dataset
-str(dat)
-
-# Summarize Data: Mean and Standard Deviation for Each Condition
-summary_data <- dat %>%
-    group_by(Growth_Medium, Time) %>%
-    summarise(
-        Mean_OD = mean(OD600_blank_corrected, na.rm = TRUE),
-        SD_OD = sd(OD600_blank_corrected, na.rm = TRUE),
-        N = n()
-    )
-
-print(summary_data)
-
-# Plot OD600 Growth Curves with Regression
+# Plot OD600 Growth Curves with Regressionline
 ggplot(dat, aes(x = Time, y = OD600_blank_corrected, color = Growth_Medium)) +
-    geom_smooth(method = "loess", se = TRUE, size = 1.2) +  # LOESS regression per medium
+    geom_smooth(method = "loess", se = TRUE, size = 1.2) +  
     labs(title = "Growth Curves (Smoothed Regression)",
          x = "Time (hours)",
          y = "OD600 (Blank Corrected)",
