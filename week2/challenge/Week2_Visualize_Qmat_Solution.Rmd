@@ -1,6 +1,6 @@
 ---
 title: "Visualize Quantitative Matrix"
-author: "UZH n UU -> what shall we use here for authors"
+author: "UZH n UU -> One of the teacher"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2: default
