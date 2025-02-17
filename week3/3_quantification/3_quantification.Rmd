@@ -203,14 +203,14 @@ return on investment?
 
 2.  All around 50-60%. Re-sequencing is unlikely to be worth our time, unless we 
 are interested in very lowly-expressed genes. Even the sample with the lowest 
-counts has almost as a considerable number of features with a count above, 
-despite having only a fraction of the counts.
+counts has almost as many features expressed above threshold as the sample 
+with the highest read counts, despite having only a fraction of the counts.
 :::
 
 ## Filtering Counts
 
 Before continuing, we should filter out genes which are lowly expressed or absent, 
-which we do this on a per-group basis (think about why this might be). Next, 
+which we do on a per-group basis (think about why this might be). Next, 
 we generate normalised counts using "Variance Stabilisation" as provided in 
 the DESeq2 package. As per the documentation, this function calculates a 
 variance stabilizing transformation (VST) from the fitted dispersion-mean 
@@ -220,17 +220,46 @@ have constant variance along the range of mean values (homoskedastic)[@DESeq2].
 There are other functions we could use, such as `rlog` which is less sensitive 
 to size factors, but VST works well in the general case.
 
+First though, we want to filter the count matrix for genes which are 
+informative, i.e. which are sufficiently expressed in the dataset and which
+can stratify our data. Before, we defined a minimum threshold of `r sigThresh` 
+at which we consider a gene expressed in a sample. Below, we do some 
+calculations to determine if a gene is sufficiently expressed in our dataset at 
+this treshold.
+
+A simple approach would be to say that we want the gene expressed in at least,
+for example, 25% of the samples. However, this simple approach might let some 
+genes through which are in fact just noise in our data. Would we for example 
+consider a gene to be important if it is expressed in only a single replicate
+for every group? Probably not. So we can try something else.
+
+Our strategy:
+
+1. Within a group, do at least half the samples express the gene? If yes, we
+consider the gene expressed in that group.
+
+2. Do at least half the groups express the gene? If yes, we keep it. If no,
+we toss it.
+
+For our data, this means that we keep a gene if it is expressed in 2 or more 
+samples within 2 or more groups.
+
 ```{r filtering}
-# First filter genes which are at expressed below threshold in less than 
-# half the samples within a group
+# First filter genes 
+
+# Which genes are above threshold?
 isPresent <- rawCounts > sigThresh
+# For every gene, how many samples within a group have it expressed?
 isPresentCond <- rowsum(t(isPresent * 1), group=meta$Condition)
+# For every gene for a particular group, is it expressed in at half the samples?
 isPresentCond <- t(sweep(isPresentCond, 1,
                          table(meta$Condition)[rownames(isPresentCond)], FUN="/")) >= 0.5
+# For every gene, is it expressed in at least 2 groups?
 isValid <- rowMeans(isPresentCond) >= 0.5
+# Subset the count matrix
 rawCountsFilt <- rawCounts[isValid, ]
 
-# Load data into a DESeq2 dataset so we can use the variance stabilizing function from Deseq2
+# Load data into a DESeq2 dataset so we can use the variance stabilizing function from DESeq2
 dds <- DESeq2::DESeqDataSetFromMatrix(countData=rawCountsFilt,
                                       colData=meta,
                                       design=~Condition)
@@ -286,12 +315,11 @@ varExp_df <- data.frame(PC= paste0("PC",1:8),
                           varExp=varExp[1:8])
 
 # Scree plot
-varExp_df %>%
-  ggplot(aes(x=PC,y=varExp, group=1)) +
-  geom_point(colour="steelblue", size=4) +
-  geom_col(fill="steelblue") +
-  geom_line() + 
-  theme_bw() + ylim(c(0,100))
+ggplot(varExp_df, aes(x=PC,y=varExp, group=1)) +
+geom_point(colour="steelblue", size=4) +
+geom_col(fill="steelblue") +
+geom_line() + 
+theme_bw() + ylim(c(0,100))
 ```
 
 Let's now plot the first and second principal components in 2-dimensions.
