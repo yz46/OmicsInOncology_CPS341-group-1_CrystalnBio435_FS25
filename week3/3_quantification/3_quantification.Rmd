@@ -138,7 +138,7 @@ sampleColours <- conditionColours[meta$Condition]
 
 First, we load the counts and combine them into a single data-frame. Note we do this here manually, but there are methods like the `tximport` function which perform this operation in a convenient way, and beyond this, correct for biases in the counts. We will be using this method of import in the optional section on differential expression analysis.
 
-```{r load counts}
+```{r load counts, message=FALSE}
 # Find the count files on the system
 countPaths <- Sys.glob(file.path(countDirectoryToUse, sprintf("*%s.txt", rownames(meta))))
 names(countPaths) <- rownames(meta)
