@@ -14,6 +14,7 @@ biocPackages <- c(
   "SummarizedExperiment",
   "DESeq2",
   "limma",
-  "WGCNA"
+  "WGCNA",
+  "impute"
 )
 BiocManager::install(biocPackages)
