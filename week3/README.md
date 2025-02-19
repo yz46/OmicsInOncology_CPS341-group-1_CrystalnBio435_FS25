@@ -1,6 +1,4 @@
----
-title: "Week3 Setup Instructions"
----
+## Week3 Setup Instructions
 
 ### 1. Sync your fork with the official repo
 
@@ -10,7 +8,7 @@ To do this, navigate to **your** forked repo on GitHub.
 
 Next, Click on "Sync fork", and then "Update Branch", like so:
 
-![](syncfork.png){width=70%}
+![Image showing how to sync forks with upstream main repos](syncfork.png)
 
 Your project should now have all of the week3 material.
 
