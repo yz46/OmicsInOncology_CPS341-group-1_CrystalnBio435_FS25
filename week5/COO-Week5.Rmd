@@ -22,7 +22,7 @@ In this COO we will _not_ generate exactly the same plots as in the article, but
 
 ## Libraries used for this tutorial:
 
-- STRINGdb: a library to visualize Protein Protein Interactions (PPI's) based on published (experimental) data 
+- tidyr, dplyr: data handling from the tidyverse
 - magrittr: together with tidyverse it allows the use of %&lt;&gt;%
 - readxl and writexl: libraries to open and write microsoft excel files
 - RGBL: is used in 'network' analysis using graph theory
@@ -31,15 +31,23 @@ In this COO we will _not_ generate exactly the same plots as in the article, but
 
 
 ```{r setup, include=FALSE}
-library(STRINGdb)
-string_db <- STRINGdb$new( version="11.0b", species=9606, score_threshold=200, input_directory="")
-library(readxl)
-library(writexl)
-library(magrittr)
-library(RBGL)
-library(Rgraphviz)
-library(graph)  # https://www.bioconductor.org/packages/devel/bioc/manuals/graph/man/graph.pdf
-library(dplyr)
+
+if (! "BiocManager" %in% installed.packages()[,1]) {
+  install.packages("BiocManager")
+}
+
+library(BiocManager)
+
+needed_packages <- c("tidyr", "dplyr", "readxl", "magrittr", "RBGL", "Rgraphviz", "graph", "dplyr")
+
+for (package in needed_packages) {
+  if(! package %in% installed.packages()[,1]) {
+    install(package, update = FALSE, ask=FALSE)
+  }
+  library(package, character.only = TRUE)
+}
+
+
 ```
 
 # What is a graph?!
