@@ -1,0 +1,72 @@
+---
+title: "Exercise4_Andrei"
+output: html_document
+---
+
+```{r}
+squid <- read.table("C:/Users/Andre/Downloads/squid1.txt", header = TRUE)
+
+# Check the structure of the dataset
+str(squid)
+summary(squid)
+dim(squid)
+squid$year_factor <- factor(squid$year)
+squid$month_factor <- factor(squid$month)
+squid$maturity_stage_factor <- factor(squid$maturity.stage)
+str(squid)
+```
+
+```{r}
+contingency_table <- xtabs(~ year_factor + maturity_stage_factor + month_factor, data = squid)
+flattened_table <-ftable(contingency_table)
+flattened_table
+```
+```{r}
+plot(squid$DML, squid$weight, main = "Scatterplot of DML vs Weight",
+     xlab = "DML", ylab = "Weight", pch = 19, col = "blue")
+squid$weight <- as.numeric(squid$weight)
+
+
+squid$weight_log <- log(squid$weight)
+
+squid$weight_sqrt <- sqrt(squid$weight)
+
+plot(squid$DML, squid$weight_log, main = "Scatterplot of DML vs log(Weight)",
+     xlab = "DML", ylab = "log(Weight)", pch = 19, col = "green")
+
+plot(squid$DML, squid$weight_sqrt, main = "Scatterplot of DML vs sqrt(Weight)",
+     xlab = "DML", ylab = "sqrt(Weight)", pch = 19, col = "red")
+
+pdf("DML_vs_Weight_Transformations.pdf")
+
+plot(squid$DML, squid$weight, main = "Scatterplot of DML vs Weight",
+     xlab = "DML", ylab = "Weight", pch = 19, col = "blue")
+
+plot(squid$DML, squid$weight_log, main = "Scatterplot of DML vs log(Weight)",
+     xlab = "DML", ylab = "log(Weight)", pch = 19, col = "green")
+
+plot(squid$DML, squid$weight_sqrt, main = "Scatterplot of DML vs sqrt(Weight)",
+     xlab = "DML", ylab = "sqrt(Weight)", pch = 19, col = "red")
+
+dev.off()
+
+
+```
+```{r}
+boxplot(DML ~ maturity_stage_factor, data = squid, 
+        main = "Boxplot of DML by Maturity Stage", 
+        xlab = "Maturity Stage", 
+        ylab = "DML", 
+        col = "lightblue", 
+        border = "darkblue")
+```
+
+```{r}
+coplot(weight_sqrt ~ DML | maturity_stage_factor, data = squid, 
+       main = "Conditional Plot of DML vs sqrt(Weight) by Maturity Stage", 
+       xlab = "DML", 
+       ylab = "sqrt(Weight)",
+       col = "blue")
+#comit test
+```
+

@@ -1,0 +1,131 @@
+---
+title: "Exercise 2"
+author: "Alicia Weber"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 2
+* from https://alexd106.github.io/intro2R/exercise_2.html
+
+### Q2
+```{r myN, echo=TRUE, include=TRUE}
+myNumber <- 12.43
+
+# do some calculations
+# natural log
+log(myNumber)
+```
+
+```{r lg10, echo=TRUE, include=TRUE}
+# log10
+log10(myNumber)
+```
+```{r lg10_1, echo=TRUE, include=TRUE}
+# log2
+log2(myNumber)
+log(myNumber, 2)
+```
+```{r lg10_2, echo=TRUE, include=TRUE}
+# squareroot
+sqrt(myNumber)
+```
+### Q3
+```{r lg10_3, echo=TRUE, include=TRUE}
+radius <- 20 / 2  
+area <- pi * radius^2  
+print(area)
+```
+### Q4
+```{r lg10_4, echo=TRUE, include=TRUE}
+cube <- (14 * 0.51)^(1/3)
+print(cube)
+```
+
+### Q5
+```{r lg10_5, echo=TRUE, include=TRUE}
+weight <- c(69, 62, 57, 59, 59, 64, 56, 66, 67, 66)
+print(weight)
+```
+
+### Q6
+```{r lg10_6, echo=TRUE, include=TRUE}
+meanw <- mean(weight)
+varw <- var(weight)
+stdw <- sd(weight)
+rangew <- range(weight)
+numw <- as.numeric(length(weight))
+
+```
+
+### Q7
+```{r lg10_7, echo=TRUE, include=TRUE}
+height <- c(112, 102, 83, 84, 99, 90, 77, 112, 133, 112)
+summary(height)
+
+some_child <- height[c(2, 3, 9, 10)]
+some_child
+
+shorter_child <- height[height <= 99]
+shorter_child
+```
+
+### Q8
+```{r lg10_8, echo=TRUE, include=TRUE}
+meters <- height/100
+bmi <- weight/(meters^2)
+bmi
+```
+
+### Q9
+```{r lg10_9, echo=TRUE, include=TRUE}
+seq1 <- seq(0, 1, by = 0.1)
+seq1
+```
+
+### Q10
+```{r lg10_10, echo=TRUE, include=TRUE}
+seq2 <- rev(seq(1, 10, by = 0.5))
+seq2
+```
+
+### Q13
+```{r lg10_11, echo=TRUE, include=TRUE}
+child_name <- c("Alfred", "Barbara", "James", "Jane", "John", "Judy", "Louise", "Mary", "Ronald", "William")
+child_name
+```
+
+### Q14
+```{r lg10_12, echo=TRUE, include=TRUE}
+names_sort <- child_name[order(height)]
+names_sort
+```
+
+### Q15
+```{r lg10_13, echo=TRUE, include=TRUE}
+weight_rev <- child_name[rev(order(weight))]
+weight_rev
+
+heav <- weight_rev[1]
+light <- weight_rev[length(weight_rev)]
+
+heav
+light
+```
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```

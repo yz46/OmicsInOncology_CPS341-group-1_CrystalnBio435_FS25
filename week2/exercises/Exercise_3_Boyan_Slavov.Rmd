@@ -1,0 +1,84 @@
+---
+title: "Week 2: Starting with R"
+author: "UZH n UU: tested by Jonas"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# install readr from CRAN
+# install.packages("readr")
+library(readr) # make sure your R has this library loaded, if not install it (see line above)
+```
+
+# Exercises for the R-Beginner - The fancy calculator
+
+## Exercise 3
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```
+### 3.5
+```{r whaledata, echo=TRUE, include=TRUE}
+whaledata <- read.table(file="C:/Users/Admin/Documents/OmicsInOncology_Group3_new/week2/data4exercises/mywhaledata.tsv", header = TRUE, sep="\t", stringsAsFactors = TRUE)
+print(whaledata)
+```
+### 3.7
+```{r summary whale, echo=TRUE, include=TRUE}
+summary(whaledata)
+```
+### 3.9
+```{r whale depth, echo=TRUE, include=TRUE}
+whales.deep <- whaledata[whaledata$depth > 1200, ]
+print(whales.deep)
+```
+
+```{r whale gradient, echo=TRUE, include=TRUE}
+whales.steep <- whaledata[whaledata$gradient > 200, ]
+print(whales.steep)
+```
+
+```{r whale noise, echo=TRUE, include=TRUE}
+whales.noise <- whaledata[whaledata$water.noise == "low", ]
+print(whales.noise)
+```
+
+```{r whale noise may, echo=TRUE, include=TRUE}
+whales.noiseMay <- whaledata[whaledata$month == "May" & whaledata$water.noise == "high", ]
+print(whales.noiseMay)
+```
+
+```{r whale e, echo=TRUE, include=TRUE}
+whales.e <- whaledata[whaledata$water.noise == "low" & whaledata$gradient > 132, ]
+print(whales.e)
+```
+
+```{r whale location, echo=TRUE, include=TRUE}
+whales.location <- whaledata[whaledata$latitude > 60.0 & whaledata$latitude < 61.0 & whaledata$longitude > -6 & whaledata$longitude < -4, ]
+print(whales.location)
+```
+
+```{r whale not medium, echo=TRUE, include=TRUE}
+whales.notMedium <- whaledata[whaledata$water.noise != "medium", ]
+print(whales.notMedium)
+```
+### 3.10
+```{r whale 10, echo=TRUE, include=TRUE}
+whales.10 <- whaledata[whaledata$water.noise == "low" & whaledata$gradient > median(whaledata$gradient), ]
+print(whales.10)
+```
+### 3.11
+``` {r 11, echo=TRUE, include=TRUE}
+whales.11 <- whaledata[whaledata$depth > 1500 & whaledata$number.whales > mean(whaledata$number.whales), ] 
+print(whales.11)
+```
+
+```{r 11 solution, echo=TRUE, include=TRUE}
+whales.11Solution <- whaledata[whaledata$depth > 1500 & whaledata$number.whales > mean(whaledata$number.whales, na.rm = TRUE), ]
+print(whales.11Solution)
+```

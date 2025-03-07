@@ -1,0 +1,54 @@
+---
+title: "exercise4_wiktoria_bachara"
+output: html_document
+---
+
+#Q3, #Q4
+```{r, echo=TRUE, include=TRUE}
+squid <- read.table('/Users/bobrzanek/Desktop/Group_2/week2/squid1.txt')
+#Convert Categorical Variables (Factors)
+# Check the structure of the dataset
+str(squid)
+# Summarize the dataset
+summary(squid)
+
+#modify squid with factors
+squid$year.f <- as.factor(squid$V3)
+squid$month.f <- as.factor(squid$V4)
+squid$maturity.stage.f <- as.factor(squid$V7)
+
+print(str)
+print(summary)
+print(squid$year.f)
+print(squid$month.f)
+print(squid$maturity.stage.f)
+```
+#Q5
+```{r, echo=TRUE, include=TRUE}
+table(squid$month.f, squid$year.f)
+ftable(xtabs(~ year.f + maturity.stage.f + month.f, data = squid))
+```
+
+#Q9
+```{r, echo=TRUE, include=TRUE}
+# clearly not linear
+plot(squid$V8, squid$V5)
+
+
+```
+
+#Q10
+```{r, echo=TRUE, include=TRUE}
+
+
+
+
+ 
+```
+#Q12
+```{r, echo=TRUE, include=TRUE}
+
+
+```
+
+

@@ -1,0 +1,172 @@
+---
+title: "Week 2: Starting with R"
+author: "Zahran Kamal"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2: default
+  bookdown::pdf_document2: default
+bibliography: bibliography.bib
+---
+
+```{r load libraries, include=FALSE}
+# Set CRAN mirror
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+# Install readr from CRAN
+install.packages("readr")
+
+# Load the library
+library(readr)
+```
+
+#Q1
+R script or R markdown?
+#Q2
+Data in "C:\Users\zasee\Documents\OmicsInOncology_CPS341nBio435_FS25_b\week2\data4exercises"
+
+#Q3-6: opening the file here
+##install
+```{r, echo=TRUE, include=TRUE}
+install.packages("readr")  
+library(readr)
+  
+
+```
+##read and display
+```{r, echo=TRUE, include=TRUE}
+whale_data <- read_tsv("../data4exercises/mywhaledata.tsv")
+# the output tells u how many observations (rows) and variables (columns) it has, the type of columns (chr - text, dbl - numeric), and what the delimiter is
+
+head(whale_data) #to show some columns. you can also check tail, or view for whole
+
+str(whale_data) #if u want to see the structure
+
+```
+
+- These data were collected during two research cruises in the North Atlantic in May and October 2003. 
+- During these two months the research vessel visited multiple stations (areas) and marine mammal observers recorded the number of whales (who doesn’t love whales!) at each of these stations. 
+- The time the vessel spent at each station was also recorded along with other site specific variables such as the latitude and longitude, water depth and gradient of the seabed. 
+- The researchers also recorded the ambient level of sub-surface noise with a hydrophone and categorised this variable into ‘low’, ‘medium’ or ‘high’. 
+Source: https://alexd106.github.io/intro2R/exercise_3.html
+
+#Q6-7
+```{r, echo=TRUE, include=TRUE}
+names(whale_data) #header values
+summary(whale_data) #number_whales has 1 missing value
+```
+#q8a,b
+```{r, echo=TRUE, include=TRUE}
+
+
+whale_sub <- whale_data[1:10, 1:4]
+whale_num <- whale_data[, c(1,3,4)]
+whale_sub
+whale_num
+
+```
+#q8c,d
+```{r, echo=TRUE, include=TRUE}
+
+
+
+whale_may <- whale_data[whale_data$month=="May",]
+whale_may
+
+whale_specific <- whale_data[11:100, 1:7]
+whale_specific
+
+```
+>Remember, for some of these questions you can specify the columns you want either by position or by name. Practice both ways. Do you have a preference? If so why? 
+
+How to do the other way?
+
+#q9,10
+```{r, echo=TRUE, include=TRUE}
+whale_deeper <- whale_data[whale_data$depth>1200,]
+
+whale_steeper <- whale_data[whale_data$gradient>200,]
+
+whale_quieter <- whale_data[whale_data$water.noise=="low",]
+
+whale_noisier_may <- whale_data[whale_data$water.noise=="high" & whale_data$month=="May",]
+
+gradient_median <- median(whale_data$gradient, na.rm = TRUE)
+
+whale_quieter_oct_steeper <- whale_data[whale_data$water.noise=="low" & whale_data$month=="October" & whale_data$gradient>gradient_median,]
+
+between <- function(x, a, b) x >= a & x <= b
+
+
+whale_faroe <- whale_data[
+  whale_data$latitude >= 60.0 & whale_data$latitude <= 61.0 & 
+  whale_data$longitude >= -6.0 & whale_data$longitude <= -4.0, 
+]
+
+whale_extreme <- whale_data[whale_data$water.noise!="medium",]
+
+whale_deeper
+whale_steeper
+whale_quieter
+whale_noisier_may
+whale_quieter_oct_steeper
+whale_faroe
+whale_extreme
+```
+#Q11
+```{r, echo=TRUE, include=TRUE}
+whale_1500maboveavg <- whale_data[whale_data$depth>1500 & whale_data$number.whales>mean(whale_data$number.whales, na.rm = TRUE),]
+mean(whale_data$number.whales, na.rm = TRUE)
+whale_1500maboveavg
+#mean needs to ignore NA values 
+```
+#Q12
+```{r, echo=TRUE, include=TRUE}
+
+may_subset <- subset(whale_data, month == "May" & time.at.station < 1000 & depth > 1000)
+
+october_subset <- subset(whale_data, month == "October" & latitude > 61, c(1,4,5,6))
+
+may_subset
+october_subset
+
+```
+#Q13, 14
+```{r, echo=TRUE, include=TRUE}
+whale_depth_sort <- whale_data[order(whale_data$depth), ]
+whale_depth_sort
+
+whale_depth_noise_sort <- whale_data[order(whale_data$water.noise, -whale_data$depth), ] #minus for descending
+
+
+```
+
+#Q15 Summarise
+```{r, echo=TRUE, include=TRUE}
+#also use tapply()
+#from guide
+mean(whale_data$time.at.station)     
+# mean time at station
+median(whale_data$depth)             
+# median depth
+length(whale_data$number.whales)     
+# number of observations
+
+#aggregate
+#We can also use the aggregate() function in a different way by using the formula method (as we did with xtabs()). On the left hand side of the formula (~) we specify the variable we want to apply the mean function on and to the right hand side our factors separated by a + symbol. The formula method also allows you to use the data = argument for convenience.
+
+
+mean_whales_noise <- aggregate(number.whales ~ water.noise, data = whale_data, FUN = mean)
+mean_whales_noise
+
+median_whales_noise_month <- aggregate(number.whales ~ water.noise + month, data = whale_data[whale_data$month %in% c("May", "October"), ], FUN = median)
+median_whales_noise_month
+
+```
+#Q16-18
+tbd
+
+# Session Information
+
+```{r sessionInfo, echo=FALSE, include=TRUE}
+pander::pander(sessionInfo())
+```

@@ -1,0 +1,58 @@
+---
+title: "Exercise3_Andrei"
+output: html_document
+---
+```{r}
+install.packages("readxl")  
+file.exists("whaledata")
+getwd()
+```
+
+```{r}
+#Ex5
+
+whaledata <- read.table(file = 'data/whaledata.txt', header = TRUE, sep = '\t', stringsAsFactors = TRUE)
+print(whale)
+```
+```{r}
+summary(whale)
+missing_values <-colSums(is.na(whale))
+missing_values[missing_values>0]
+whale[!complete.cases(whale), ]
+
+```
+```{r}
+depth_greater_1200 <- whale[whale$depth > 1200, ]
+
+gradient_steeper_200 <- whale[whale$gradient > 200, ]
+
+low_water_noise <- whale[whale$water.noise == "low", ]
+
+high_water_noise_may <- whale[whale$water.noise == "high" & whale$month == "May", ]
+
+october_low_noise_high_gradient <- whale[whale$month == "October" & whale$water.noise == "low" & whale$gradient > 132, ]
+
+lat_long_range <- whale[whale$latitude >= 60.0 & whale$latitude <= 61.0 & whale$longitude >= -6.0 & whale$longitude <= -4.0, ]
+
+not_medium_water_noise <- whale[whale$water.noise != "medium", ]
+
+head(depth_greater_1200)
+head(gradient_steeper_200)
+head(low_water_noise)
+head(high_water_noise_may)
+head(october_low_noise_high_gradient)
+head(lat_long_range)
+head(not_medium_water_noise)
+
+```
+```{r}
+october_low_noise_high_gradient_median <- whale[whale$month == "October" & whale$water.noise == "low" & whale$gradient > median(whale$gradient, na.rm = TRUE), ]
+
+head(october_low_noise_high_gradient_median)
+
+```
+
+```{r}
+october_low_noise_high_gradient_median <- whale[whale$depth > 1500 & whale$gradient > median(whale$gradient, na.rm = TRUE), ]
+```
+
